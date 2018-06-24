@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 24, 2018 at 01:56 AM
+-- Generation Time: Jun 24, 2018 at 03:29 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -30,9 +30,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `alamat` varchar(500) NOT NULL,
   `username` varchar(25) NOT NULL,
   `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `nama`, `alamat`, `username`, `password`) VALUES
+(1, 'aksan', 'btp', 'aksanji', '123');
 
 -- --------------------------------------------------------
 
@@ -96,7 +105,7 @@ ALTER TABLE `jadwal_kajian`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `artikel_kajian`

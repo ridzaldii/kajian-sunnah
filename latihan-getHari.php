@@ -20,6 +20,6 @@
 		weekday[6] = "Sabtu";
 
 		var n = weekday[date.getDay()];
-		day.value = n;
+		d.value = n;
 	}
 </script>
