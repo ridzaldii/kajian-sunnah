@@ -22,6 +22,7 @@ class JsonDisplayMarker {
                         'id'=>$data['id'],
                         'nama'=>$data['nama'],
                         'alamat'=>$data['alamat'],
+                        'email'=>$data['email'],
                         'username'=>$data['username'],
                         'password'=>$data['password'])
                     );

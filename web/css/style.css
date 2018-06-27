@@ -13,8 +13,8 @@ html, body{
 	font-family: 'Roboto', sans-serif;
     font-size: 100%;
     overflow-x: hidden;
-    /*background: url(../images/bg2.jpg) no-repeat 0px 0px;*/
-	/*background-size:cover;*/
+    background: url(../images/bg3.png) no-repeat 0px 0px;
+	background-size:cover;
 }
 body a{
 	transition: 0.5s all ease;
@@ -202,6 +202,10 @@ ul.sidebar-menu li a.active i {
     transition:all .3s ease-in-out;
 }
 .footer {
+    position: fixed;
+    bottom: 0;
+    /*left: 0;*/
+    width: 100%;
     background: #b4f0bf;
     padding: 20px;
 }
@@ -235,6 +239,7 @@ ul.sidebar-menu li a.active i {
 .wrapper {
     display:inline-block;
     margin-top:80px;
+    margin-bottom:70px;
     padding:15px;
     width:100%;
 }
@@ -745,6 +750,26 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
 }
 .market-update-right i.fa.fa-users {
     font-size: 3em;
+    color:#fff;
+   text-align: left;
+}
+.market-update-right i.fa.fa-calendar {
+     font-size: 3em;
+    color:#fff;
+   text-align: left;
+}
+.market-update-right i.fa.fa-bullhorn {
+     font-size: 3em;
+    color:#fff;
+   text-align: left;
+}
+.market-update-right i.fa.fa-pencil {
+     font-size: 3em;
+    color:#fff;
+   text-align: left;
+}
+.market-update-right i.fa.fa-money {
+     font-size: 3em;
     color:#fff;
    text-align: left;
 }
@@ -2355,7 +2380,7 @@ ul.inbox-pagination li {
 }
 /*-- gallery --*/
 .w3layouts-main h2 {
-	color: #8b5c7e;
+	color: #fff;
     font-size: 29px;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -2365,7 +2390,7 @@ ul.inbox-pagination li {
 .w3layouts-main {
     width: 30%;
     margin:5em auto;
-    background:rgba(171, 119, 157, 0.27);
+    background:rgba(121, 195, 172, 0.32);
     padding: 42px 35px;
 }
 /*--//header--*/
@@ -2417,13 +2442,13 @@ input.ggg{
     font-size: 18px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    background: #f0bcb4;
+    background: #00e693;
     color: white;
     border: none;
     outline: none;
 	display: table;
     cursor: pointer;
-    margin: 45px auto 31px;
+    margin: 30px auto 10px;
     transition: 0.5s all;
     -webkit-transition: 0.5s all;
     -o-transition: 0.5s all;
@@ -2431,7 +2456,7 @@ input.ggg{
     -ms-transition: 0.5s all;
 }
 .w3layouts-main input[type="submit"]:hover {
-	background:#8b5c7e;
+	background:#009861;
 	transition:0.5s all;
 	-webkit-transition:0.5s all;
 	-o-transition:0.5s all;

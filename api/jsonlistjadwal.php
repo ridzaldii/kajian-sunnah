@@ -24,8 +24,9 @@ class JsonDisplayMarker {
                         'ustadz'=>$data['ustadz'],
                         'deskripsi'=>$data['deskripsi'],
                         'tanggal'=>$data['tanggal'],
+                        'waktu'=>$data['waktu'],
                         'hari'=>$data['hari'],
-                        'tempat'=>$data['tempat'],
+                        'alamat'=>$data['tempat'],
                         'gambar'=>$data['gambar'])
                     );
             }

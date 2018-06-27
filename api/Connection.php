@@ -1,6 +1,11 @@
 <?php
 
 class Connection {
+    function getLink(){
+        $ip = "192.168.121.145";
+        $link = "http://".$ip."/kajian-sunnah/web/images/Donasi/";        
+        return $link;
+    }
     function getConnection(){
         $host       = "localhost";
         $username   = "root";
