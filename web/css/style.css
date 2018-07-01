@@ -202,12 +202,19 @@ ul.sidebar-menu li a.active i {
     transition:all .3s ease-in-out;
 }
 .footer {
-    position: fixed;
+    /*position: absolute;*/
     bottom: 0;
     /*left: 0;*/
     width: 100%;
+    /*margin-top: 6px;*/
     background: #b4f0bf;
-    padding: 20px;
+    padding: 20px;/*
+    -webkit-transition: -webkit-transform .3s ease-in-out, margin .3s ease-in-out;
+    -moz-transition: -moz-transform .3s ease-in-out, margin .3s ease-in-out;
+    -o-transition: -o-transform .3s ease-in-out, margin .3s ease-in-out;
+    transition: transform .3s ease-in-out, margin .3s ease-in-out;*/
+    /*margin-left: 0px;*/
+    /*z-index: 820;*/
 }
 .footer p {
     color: #00380d;

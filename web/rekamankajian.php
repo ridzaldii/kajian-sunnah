@@ -7,9 +7,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <?php 
 include "connect.php";
 session_start();
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['nama_user'])) {
   header('location:'.$link.'/login.php');
-}elseif (isset($_SESSION['username'])) {
+}elseif (isset($_SESSION['nama_user'])) {
 
  ?>
  <!DOCTYPE html>
@@ -64,7 +64,7 @@ if (!isset($_SESSION['username'])) {
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <img alt="" src="images/2.png">
-                            <span class="username"><?php echo $_SESSION['nama']; ?></span>
+                            <span class="username"><?php echo $_SESSION['nama_user']; ?></span>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">
@@ -118,6 +118,7 @@ if (!isset($_SESSION['username'])) {
                           <ul class="sub">
                             <li><a href="tambahartikel.php">Tambah Artikel</a></li>
                             <li><a href="artikelkajian.php">Kelola Artikel</a></li>
+                            <li><a href="komentarartikel.php">Kelola Komentar</a></li>
                           </ul>
                         </li>
                         <li class="sub-menu">
@@ -142,7 +143,7 @@ if (!isset($_SESSION['username'])) {
           <div class="table-agile-info">
            <div class="panel panel-default">
               <div class="panel-heading">
-               Jadwal Kajian
+               Rekaman Kajian
               </div>
               <div>
                 <table class="table" ui-jq="footable" ui-options='{
@@ -158,8 +159,9 @@ if (!isset($_SESSION['username'])) {
                   <thead>
                     <tr>
                       <th data-breakpoints="xs">ID</th>
+                      <th>Judul Kajian</th>
                       <th>File Rekaman</th>
-                      <th >Action</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -171,8 +173,29 @@ if (!isset($_SESSION['username'])) {
                      ?>
                     <tr>
                       <td><?php echo $row['id']; ?></td>
-                      <td><?php echo $row['rekaman']; ?></td>
-                      <td></td>
+                      <td><?php echo $row['judul'];?></td>
+                      <td>
+                        <?php 
+                          if (file_exists("file/".$row['rekaman'])==1) {
+                            ?>
+                            <audio controls>
+                              <source src="file/<?php echo $row['rekaman']; ?>" />
+                            </audio>
+                            <?php
+                          } else{
+                            echo "File Tidak Ditemukan";
+                          }?><br>
+                          
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal<?php echo $row['id'] ?>">Edit</button>
+                        <a onclick="return confirm('Hapus Rekaman <?php echo $row['judul']; ?>?')" href="<?php echo $link; ?>/proses/crud-rekaman.php?hapus=<?php echo $row['id'] ?>"><button type="button" class="btn btn-sm btn-danger">Hapus</button></a>
+                        <!-- Modal Start -->
+                        <div id="myModal<?php echo $row['id']; ?>" class="modal fade" role="dialog">
+                                <?php include "pages/modal-rekaman.php"; ?>
+                        </div>
+                         <!-- Modal End -->
+                      </td>
                     </tr>
                     <?php } ?>
                   </tbody>
@@ -182,11 +205,11 @@ if (!isset($_SESSION['username'])) {
           </div>
          </section>
          <!-- footer -->
-         <div class="footer">
-           <div class="wthree-copyright">
-             <p>© 2017 Visitors. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
-           </div>
-         </div>
+         <div class="footer" style="margin-top:150px">
+            <div class="pull-right d-none d-sm-inline-block">Kajian Makassar
+            </div>
+            &copy; 2018 - <a href="#">Halaman Admin Kajian Makassar</a>
+          </div>
          <!-- / footer -->
        </section>
        <!--main content end-->

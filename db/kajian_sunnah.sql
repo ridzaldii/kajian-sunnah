@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 28, 2018 at 03:52 AM
+-- Generation Time: Jul 01, 2018 at 11:21 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -54,15 +54,17 @@ CREATE TABLE `artikel_kajian` (
   `id` int(11) NOT NULL,
   `judul` varchar(500) NOT NULL,
   `pembicara` varchar(250) NOT NULL,
-  `deskripsi` text CHARACTER SET utf8 NOT NULL
+  `deskripsi` text CHARACTER SET utf8 NOT NULL,
+  `kategori` enum('aqidah','tauhid','fikih','tematik') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `artikel_kajian`
 --
 
-INSERT INTO `artikel_kajian` (`id`, `judul`, `pembicara`, `deskripsi`) VALUES
-(1, 'Syarat sah salat', 'Ustads ini', '\"(Syarat dalam bab shalat ialah) hal-hal yang menjadi penentu keabsahan shalat, namun bukan bagian dari shalat. Berbeda dengan rukun yang merupakan bagian shalat.\"');
+INSERT INTO `artikel_kajian` (`id`, `judul`, `pembicara`, `deskripsi`, `kategori`) VALUES
+(1, 'Syarat sah salat', 'Ustads inia', '\"(Syarat dalam bab shalat ialah) hal-hal yang menjadi penentu keabsahan shalat, namun bukan bagian dari shalat. Berbeda dengan rukun yang merupakan bagian shalat.\"', 'fikih'),
+(2, 'Makhrijal Huruf', 'Yusu Mansyur', 'Pengucapan huruf hijaiyah', 'tauhid');
 
 -- --------------------------------------------------------
 
@@ -83,7 +85,8 @@ CREATE TABLE `donasi` (
 --
 
 INSERT INTO `donasi` (`id`, `gambar`, `kontak`, `wa`, `telfon`) VALUES
-(1, 'donasi-buka.jpg', '6282291760763', '1', '1');
+(1, 'donasi-buka.jpg', '82291760763', '0', '1'),
+(4, '1530417198-121.jpg', '82291760763', '1', '0');
 
 -- --------------------------------------------------------
 
@@ -100,7 +103,7 @@ CREATE TABLE `jadwal_kajian` (
   `waktu` time DEFAULT NULL,
   `hari` enum('Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu') NOT NULL,
   `tempat` varchar(500) NOT NULL,
-  `gambar` text NOT NULL
+  `gambar` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -108,8 +111,29 @@ CREATE TABLE `jadwal_kajian` (
 --
 
 INSERT INTO `jadwal_kajian` (`id`, `judul`, `ustadz`, `deskripsi`, `tanggal`, `waktu`, `hari`, `tempat`, `gambar`) VALUES
-(1, 'Ceramah Ramadhan 1', 'Yusuf Mansyur', 'Ceramah ramadhan', '2018-06-27', '04:00:00', 'Rabu', 'Masjid baiturahman', ''),
-(2, 'Ceramah ramadhan 2', 'yusuf', 'ceramah ramadhan 2', '2018-06-28', '13:00:00', 'Kamis', 'antang', '');
+(1, 'Syarat sah salat', 'Yusuf Mansyur', '\"(Syarat dalam bab shalat ialah) hal-hal yang menjadi penentu keabsahan shalat, namun bukan bagian dari shalat. Berbeda dengan rukun yang merupakan bagian shalat.\"', '2018-07-31', '15:00:00', 'Selasa', 'Masjid baiturahman', NULL),
+(2, 'Ceramah ramadhan 2', 'yusuf', 'ceramah ramadhan 2', '2018-06-28', '13:00:00', 'Kamis', 'Masjid nurul hijrah', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `komentar`
+--
+
+CREATE TABLE `komentar` (
+  `id` int(11) NOT NULL,
+  `id_artikel` int(11) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `komentar` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `komentar`
+--
+
+INSERT INTO `komentar` (`id`, `id_artikel`, `nama`, `komentar`) VALUES
+(1, 1, 'Ahmad', 'Sangat bermanfaat, syukran.'),
+(2, 2, 'Ahmad', 'asdfasdfadsf');
 
 -- --------------------------------------------------------
 
@@ -119,8 +143,16 @@ INSERT INTO `jadwal_kajian` (`id`, `judul`, `ustadz`, `deskripsi`, `tanggal`, `w
 
 CREATE TABLE `rekaman_kajian` (
   `id` int(11) NOT NULL,
+  `judul` varchar(50) NOT NULL,
   `rekaman` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rekaman_kajian`
+--
+
+INSERT INTO `rekaman_kajian` (`id`, `judul`, `rekaman`) VALUES
+(6, 'asdasd', '1530361760-01_c.wav');
 
 --
 -- Indexes for dumped tables
@@ -152,6 +184,13 @@ ALTER TABLE `jadwal_kajian`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `komentar`
+--
+ALTER TABLE `komentar`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_artikel` (`id_artikel`);
+
+--
 -- Indexes for table `rekaman_kajian`
 --
 ALTER TABLE `rekaman_kajian`
@@ -171,13 +210,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `artikel_kajian`
 --
 ALTER TABLE `artikel_kajian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `donasi`
 --
 ALTER TABLE `donasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `jadwal_kajian`
@@ -186,10 +225,26 @@ ALTER TABLE `jadwal_kajian`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `komentar`
+--
+ALTER TABLE `komentar`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `rekaman_kajian`
 --
 ALTER TABLE `rekaman_kajian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `komentar`
+--
+ALTER TABLE `komentar`
+  ADD CONSTRAINT `komentar_ibfk_1` FOREIGN KEY (`id_artikel`) REFERENCES `artikel_kajian` (`id`);
 
 DELIMITER $$
 --

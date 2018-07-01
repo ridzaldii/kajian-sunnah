@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
 			echo "sukses";
 		    // menyimpan username dan level ke dalam session
 		    $_SESSION['id'] = $db_data['id'];
-		    $_SESSION['nama'] = $db_data['nama'];
+		    $_SESSION['nama_user'] = $db_data['nama'];
 		    $_SESSION['username'] = $db_data['username'];
 		    $_SESSION['password'] = $db_data['id_user'];
 		    header('location:'.$link);

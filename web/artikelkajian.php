@@ -7,9 +7,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <?php 
 include "connect.php";
 session_start();
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['nama_user'])) {
   header('location:'.$link.'/login.php');
-}elseif (isset($_SESSION['username'])) {
+}elseif (isset($_SESSION['nama_user'])) {
 
  ?>
  <!DOCTYPE html>
@@ -64,7 +64,7 @@ if (!isset($_SESSION['username'])) {
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <img alt="" src="images/2.png">
-                            <span class="username"><?php echo $_SESSION['nama']; ?></span>
+                            <span class="username"><?php echo $_SESSION['nama_user']; ?></span>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">
@@ -118,6 +118,7 @@ if (!isset($_SESSION['username'])) {
                           <ul class="sub">
                             <li><a href="tambahartikel.php">Tambah Artikel</a></li>
                             <li><a class="active" href="artikelkajian.php">Kelola Artikel</a></li>
+                            <li><a href="komentarartikel.php">Kelola Komentar</a></li>
                           </ul>
                         </li>
                         <li class="sub-menu">
@@ -142,7 +143,7 @@ if (!isset($_SESSION['username'])) {
           <div class="table-agile-info">
            <div class="panel panel-default">
               <div class="panel-heading">
-               Jadwal Kajian
+               Artikel Kajian
               </div>
               <div>
                 <table class="table" ui-jq="footable" ui-options='{
@@ -161,6 +162,7 @@ if (!isset($_SESSION['username'])) {
                       <th>Judul</th>
                       <th>Pembicara</th>
                       <th data-breakpoints="xs">Deksripsi</th>
+                      <th >Kategori</th>
                       <th >Action</th>
                     </tr>
                   </thead>
@@ -176,7 +178,16 @@ if (!isset($_SESSION['username'])) {
                       <td><?php echo $row['judul']; ?></td>
                       <td><?php echo $row['pembicara']; ?></td>
                       <td><?php echo $row['deskripsi']; ?></td>
-                      <td></td>
+                      <td><?php echo $row['kategori']; ?></td>
+                      <td>
+                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal<?php echo $row['id'] ?>">Edit</button>
+                        <a onclick="return confirm('Hapus Artikel <?php echo $row['judul']; ?>?')" href="<?php echo $link; ?>/proses/crud-artikel.php?hapus=<?php echo $row['id'] ?>"><button type="button" class="btn btn-sm btn-danger">Hapus</button></a>
+                        <!-- Modal Start -->
+                        <div id="myModal<?php echo $row['id']; ?>" class="modal fade" role="dialog">
+                                <?php include "pages/modal-artikel.php"; ?>
+                        </div>
+                         <!-- Modal End -->
+                      </td>
                     </tr>
                     <?php } ?>
                   </tbody>
@@ -186,11 +197,11 @@ if (!isset($_SESSION['username'])) {
           </div>
          </section>
          <!-- footer -->
-         <div class="footer">
-           <div class="wthree-copyright">
-             <p>© 2017 Visitors. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
-           </div>
-         </div>
+         <div class="footer" style="margin-top:200px">
+            <div class="pull-right d-none d-sm-inline-block">Kajian Makassar
+            </div>
+            &copy; 2018 - <a href="#">Halaman Admin Kajian Makassar</a>
+          </div>
          <!-- / footer -->
        </section>
        <!--main content end-->

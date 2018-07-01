@@ -10,40 +10,21 @@ class JsonDisplayMarker {
         $response = array();
         $code = "code";
         $message = "message";
-        $kategori = htmlspecialchars($_POST['kategori']);
+
+        $link = $connection->getLink();
         try{
             //tampilkan semua data dari mysql
-            $queryMarker = "SELECT * FROM artikel_kajian WHERE kategori='$kategori'";
+            $queryMarker = "SELECT * FROM rekaman_kajian";
             $getData = $conn->prepare($queryMarker);
             $getData->execute();
             $result = $getData->fetchAll(PDO::FETCH_ASSOC);
             foreach($result as $data){
-                $response1 = array();
-                $queryMarker1 = "SELECT * FROM komentar WHERE id_artikel=".$data['id'];
-                $getData1 = $conn->prepare($queryMarker1);
-                $getData1->execute();
-                $result1 = $getData1->fetchAll(PDO::FETCH_ASSOC);
-                foreach($result1 as $data1){
-                    array_push($response1, 
-                        array(
-                            'id'=>$data1['id'],
-                            'id_artikel'=>$data1['id_artikel'],
-                            'nama'=>$data1['nama'],
-                            'komentar'=>$data1['komentar']
-                            )
-                        );
-                }
                 array_push($response,
                     array(
                         'id'=>$data['id'],
                         'judul'=>$data['judul'],
-                        'pembicara'=>$data['pembicara'],
-                        'deskripsi'=>$data['deskripsi'],
-                        'kategori'=>$data['kategori'],
-                        'komentar'=>$response1
-                        )
+                        'rekaman'=>$link.'file/'.$data['rekaman'])
                     );
-
             }
         }catch (PDOException $e){
             echo "Failed displaying data".$e->getMessage();

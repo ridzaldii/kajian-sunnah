@@ -7,9 +7,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <?php 
 include "connect.php";
 session_start();
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['nama_user'])) {
   header('location:'.$link.'/login.php');
-}elseif (isset($_SESSION['username'])) {
+}elseif (isset($_SESSION['nama_user'])) {
 
  ?>
  <!DOCTYPE html>
@@ -64,7 +64,7 @@ if (!isset($_SESSION['username'])) {
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <img alt="" src="images/2.png">
-                            <span class="username"><?php echo $_SESSION['nama']; ?></span>
+                            <span class="username"><?php echo $_SESSION['nama_user']; ?></span>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">
@@ -118,6 +118,7 @@ if (!isset($_SESSION['username'])) {
                           <ul class="sub">
                             <li><a href="tambahartikel.php">Tambah Artikel</a></li>
                             <li><a href="artikelkajian.php">Kelola Artikel</a></li>
+                            <li><a href="komentarartikel.php">Kelola Komentar</a></li>
                           </ul>
                         </li>
                         <li class="sub-menu">
@@ -139,13 +140,43 @@ if (!isset($_SESSION['username'])) {
         <!--main content start-->
         <section id="main-content">
          <section class="wrapper">
+          <div class="form-w3layouts">
+          <div class="row">
+            <div class="col-lg-12">
+              <section class="panel">
+                <header class="panel-heading">
+                  Tambah Rekaman
+                </header>
+                <div class="panel-body">
+                  <div class="position-center">
+                  <form role="form" class="form-horizontal bucket-form" action="proses/crud-rekaman.php" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="judul">Judul Kajian</label>
+                        <input type="text" id="judul" name="judul" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="filerekaman">Input File Rekaman</label>
+                        <input type="file" id="rekaman" name="rekaman" class="form-control">
+                    </div>
+                    </div>
+                    <div class="position-center">
+                      <div class="text-center">
+                          <button type="submit" name="submit" class="btn btn-success">Submit</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </section>
+            </div>
+          </div>
+          </div>
          </section>
          <!-- footer -->
          <div class="footer">
-           <div class="wthree-copyright">
-             <p>© 2017 Visitors. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
-           </div>
-         </div>
+            <div class="pull-right d-none d-sm-inline-block">Kajian Makassar
+            </div>
+            &copy; 2018 - <a href="#">Halaman Admin Kajian Makassar</a>
+          </div>
          <!-- / footer -->
        </section>
        <!--main content end-->

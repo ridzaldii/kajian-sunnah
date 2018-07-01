@@ -22,8 +22,8 @@ class JsonDisplayMarker {
                 array_push($response,
                     array(
                         'id'=>$data['id'],
-                        'gambar'=>$link.$data['gambar'],
-                        'kontak'=>$data['kontak'],
+                        'gambar'=>$link.'images/Donasi/'.$data['gambar'],
+                        'kontak'=>"62".$data['kontak'],
                         'wa'=>$data['wa'],
                         'telfon'=>$data['telfon'])
                     );

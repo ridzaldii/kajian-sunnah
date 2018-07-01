@@ -7,9 +7,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <?php 
 include "connect.php";
 session_start();
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['nama_user'])) {
   header('location:'.$link.'/login.php');
-}elseif (isset($_SESSION['username'])) {
+}elseif (isset($_SESSION['nama_user'])) {
 
  ?>
  <!DOCTYPE html>
@@ -64,7 +64,7 @@ if (!isset($_SESSION['username'])) {
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <img alt="" src="images/2.png">
-                            <span class="username"><?php echo $_SESSION['nama']; ?></span>
+                            <span class="username"><?php echo $_SESSION['nama_user']; ?></span>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">
@@ -118,6 +118,7 @@ if (!isset($_SESSION['username'])) {
                           <ul class="sub">
                             <li><a class="active" href="tambahartikel.php">Tambah Artikel</a></li>
                             <li><a href="artikelkajian.php">Kelola Artikel</a></li>
+                            <li><a href="komentarartikel.php">Kelola Komentar</a></li>
                           </ul>
                         </li>
                         <li class="sub-menu">
@@ -139,13 +140,62 @@ if (!isset($_SESSION['username'])) {
         <!--main content start-->
         <section id="main-content">
          <section class="wrapper">
+          <div class="form-w3layouts">
+          <div class="row">
+            <div class="col-lg-12">
+              <section class="panel">
+                <header class="panel-heading">
+                  Tambah Artikel
+                </header>
+                <div class="panel-body">
+                  <form class="form-horizontal bucket-form" action="proses/crud-artikel.php" method="post">
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">Judul</label>
+                      <div class="col-sm-6">
+                        <input type="text" name="judul" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">Pembicara</label>
+                      <div class="col-sm-6">
+                        <input type="text" name="pembicara" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">Isi</label>
+                      <div class="col-sm-6">
+                        <textarea type="text" name="deskripsi" class="md-textarea form-control" rows="3"></textarea>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label col-lg-3" for="inputSuccess">Kategori</label>
+                        <div class="col-lg-6">
+                          <select name="kategori" class="form-control">
+                            <option value="aqidah">Aqidah</option>
+                            <option value="fikih">Fikih</option>
+                            <option value="tauhid">Tauhid</option>
+                            <option value="tematik">Tematik</option>
+                          </select>
+                        </div>
+                    </div>
+                    <div class="position-center">
+                      <div class="text-center">
+                          <button type="submit" name="submit" class="btn btn-success">Submit</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </section>
+            </div>
+          </div>
+          </div>
          </section>
          <!-- footer -->
-         <div class="footer">
-           <div class="wthree-copyright">
-             <p>© 2017 Visitors. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
-           </div>
-         </div>
+         <div class="footer" style="margin-top:5px">
+            <div class="pull-right d-none d-sm-inline-block">Kajian Makassar
+            </div>
+            &copy; 2018 - <a href="#">Halaman Admin Kajian Makassar</a>
+          </div>
          <!-- / footer -->
        </section>
        <!--main content end-->

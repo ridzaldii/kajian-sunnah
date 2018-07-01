@@ -7,9 +7,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <?php 
 include "connect.php";
 session_start();
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['nama_user'])) {
   header('location:'.$link.'/login.php');
-}elseif (isset($_SESSION['username'])) {
+}elseif (isset($_SESSION['nama_user'])) {
 
  ?>
  <!DOCTYPE html>
@@ -35,7 +35,10 @@ if (!isset($_SESSION['username'])) {
     <!-- calendar -->
     <link rel="stylesheet" href="css/monthly.css">
     <!-- //calendar -->
+    <!-- timepicker -->
+    <link rel="stylesheet" href="css/timepicker.css">
     <!-- //font-awesome icons -->
+    <script src="js/timepicker.min.js"></script>
     <script src="js/jquery2.0.3.min.js"></script>
     <script src="js/raphael-min.js"></script>
     <script src="js/morris.js"></script>
@@ -64,7 +67,7 @@ if (!isset($_SESSION['username'])) {
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <img alt="" src="images/2.png">
-                            <span class="username"><?php echo $_SESSION['nama']; ?></span>
+                            <span class="username"><?php echo $_SESSION['nama_user']; ?></span>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">
@@ -118,6 +121,7 @@ if (!isset($_SESSION['username'])) {
                           <ul class="sub">
                             <li><a href="tambahartikel.php">Tambah Artikel</a></li>
                             <li><a href="artikelkajian.php">Kelola Artikel</a></li>
+                            <li><a href="komentarartikel.php">Kelola Komentar</a></li>
                           </ul>
                         </li>
                         <li class="sub-menu">
@@ -139,13 +143,74 @@ if (!isset($_SESSION['username'])) {
         <!--main content start-->
         <section id="main-content">
          <section class="wrapper">
-         </section>
+          <div class="form-w3layouts">
+          <div class="row">
+            <div class="col-lg-12">
+              <section class="panel">
+                <header class="panel-heading">
+                  Tambah Jadwal
+                </header>
+                <div class="panel-body">
+                  <form class="form-horizontal bucket-form" action="proses/crud-jadwal.php" method="post">
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">Judul</label>
+                      <div class="col-sm-6">
+                        <input type="text" name="judul" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">Ustadz</label>
+                      <div class="col-sm-6">
+                        <input type="text" name="ustadz" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">Deskripsi</label>
+                      <div class="col-sm-6">
+                        <textarea type="text" name="deskripsi" class="md-textarea form-control" rows="3"></textarea>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">Tanggal</label>
+                      <div class="col-sm-3">
+                        <input id="date_picker" type="date" class="form-control">
+                        <input type="text" id="tanggal" name="tanggal" hidden>
+                      </div>
+                      <label class="col-sm-1 control-label">Hari</label>
+                      <div class="col-sm-2">
+                        <input type="text" id="hari" name="hari" class="form-control" readonly>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">Jam</label>
+                      <div class="col-sm-3">
+                        <input type="text" id="timep" name="waktu" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">Tempat</label>
+                      <div class="col-sm-6">
+                        <input type="text" name="tempat" class="form-control">
+                      </div>
+                    </div>
+                    <div class="position-center">
+                      <div class="text-center">
+                          <button type="submit" name="submit" class="btn btn-success">Submit</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </section>
+            </div>
+          </div>
+          </div>
+        </section>
          <!-- footer -->
-         <div class="footer">
-           <div class="wthree-copyright">
-             <p>© 2017 Visitors. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
-           </div>
-         </div>
+         <div class="footer" style="">
+            <div class="pull-right d-none d-sm-inline-block">Kajian Makassar
+            </div>
+            &copy; 2018 - <a href="#">Halaman Admin Kajian Makassar</a>
+          </div>
          <!-- / footer -->
        </section>
        <!--main content end-->
@@ -245,6 +310,58 @@ $(window).load( function() {
 });
 </script>
 <!-- //calendar -->
+
+<!-- timepicker -->
+<script type="text/javascript">
+document.getElementById("date_picker").addEventListener("input", myFunction);
+
+  function myFunction() {
+    var j = document.getElementById("tanggal");
+    var f = document.getElementById("date_picker");
+    var d = document.getElementById("hari");
+
+    var date = new Date(f.value);
+    var bulan = "";
+    var tgl = "";
+    if (date.getMonth()>9) {
+      bulan = date.getMonth()+1;
+    } else{
+      bulan = "0"+(date.getMonth()+1);
+    };
+
+    if (date.getDate()>9) {
+      tgl = date.getDate();
+    }else{
+      tgl = "0"+date.getDate();
+    };
+
+    j.value = date.getFullYear()+"-"+bulan+"-"+tgl;
+
+    var weekday = new Array(7);
+    weekday[0] = "Minggu";
+    weekday[1] = "Senin";
+    weekday[2] = "Selasa";
+    weekday[3] = "Rabu";
+    weekday[4] = "Kamis";
+    weekday[5] = "Jumat";
+    weekday[6] = "Sabtu";
+
+    var n = weekday[date.getDay()];
+    d.value = n;
+  }
+
+var timepicker = new TimePicker('timep', {
+  lang: 'en',
+  theme: 'dark'
+});
+timepicker.on('change', function(evt) {
+
+  var value = (evt.hour || '00') + ':' + (evt.minute || '00');
+  evt.element.value = value;
+
+});
+</script>
+<!-- timepicker end -->
 </body>
 </html>
 <?php 

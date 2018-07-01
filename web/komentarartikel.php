@@ -111,23 +111,23 @@ if (!isset($_SESSION['nama_user'])) {
                           </ul>
                         </li>
                         <li class="sub-menu">
-                          <a href="javascript:;">
+                          <a class="active" href="javascript:;">
                             <i class="fa fa-pencil"></i>
                             <span>Artikel Kajian</span>
                           </a>
                           <ul class="sub">
                             <li><a href="tambahartikel.php">Tambah Artikel</a></li>
                             <li><a href="artikelkajian.php">Kelola Artikel</a></li>
-                            <li><a href="komentarartikel.php">Kelola Komentar</a></li>
+                            <li><a class="active" href="komentarartikel.php">Kelola Komentar</a></li>
                           </ul>
                         </li>
                         <li class="sub-menu">
-                          <a class="active" href="javascript:;">
+                          <a href="javascript:;">
                             <i class="fa fa-money"></i>
                             <span>Informasi Donasi</span>
                           </a>
                           <ul class="sub">
-                            <li><a class="active" href="tambahinfo.php">Tambah Informasi</a></li>
+                            <li><a href="tambahinfo.php">Tambah Informasi</a></li>
                             <li><a href="infodonasi.php">Kelola Informasi</a></li>
                           </ul>
                         </li>
@@ -140,66 +140,56 @@ if (!isset($_SESSION['nama_user'])) {
         <!--main content start-->
         <section id="main-content">
          <section class="wrapper">
-          <div class="form-w3layouts">
-          <div class="row">
-            <div class="col-lg-12">
-              <section class="panel">
-                <header class="panel-heading">
-                  Tambah Artikel
-                </header>
-                <div class="panel-body">
-                  <form class="form-horizontal bucket-form" action="proses/crud-donasi.php" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Gambar</label>
-                      <div class="col-sm-6">
-                        <input type="file" id="gambar" name="gambar" class="form-control" required>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Nomor Kontak</label>
-                      <div class="col-sm-1">
-                        <input type="text" class="form-control" value="+62" disabled>
-                      </div>
-                      <div class="col-sm-5">
-                        <input type="number" name="kontak" class="form-control">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label col-lg-3" for="inputSuccess">Telepon</label>
-                        <div class="col-lg-6">
-                            <label class="radio-inline">
-                                <input type="radio" name="telfon" id="radio11" value="1"> Ya
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="telfon" id="radio12" value="0"> Tidak
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label col-lg-3" for="inputSuccess">WhatsApp</label>
-                        <div class="col-lg-6">
-                            <label class="radio-inline">
-                                <input type="radio" name="wa" id="radio11" value="1"> Ya
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="wa" id="radio12" value="0"> Tidak
-                            </label>
-                        </div>
-                    </div>
-                    <div class="position-center">
-                      <div class="text-center">
-                          <button type="submit" name="submit" class="btn btn-success">Submit</button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </section>
+          <div class="table-agile-info">
+           <div class="panel panel-default">
+              <div class="panel-heading">
+               Kelola Komentar Artikel
+              </div>
+              <div>
+                <table class="table" ui-jq="footable" ui-options='{
+                  "paging": {
+                    "enabled": true
+                  },
+                  "filtering": {
+                    "enabled": true
+                  },
+                  "sorting": {
+                    "enabled": true
+                  }}'>
+                  <thead>
+                    <tr>
+                      <th data-breakpoints="xs">ID</th>
+                      <th>Kajian</th>
+                      <th>Nama</th>
+                      <th data-breakpoints="xs">Komentar</th>
+                      <th >Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php 
+                      $query = "SELECT komentar.id, artikel_kajian.judul, komentar.nama, komentar.komentar FROM komentar inner join artikel_kajian WHERE komentar.id_artikel=artikel_kajian.id";
+                      $result = $conn->query($query);
+
+                      while ($row = $result->fetch_assoc()) {
+                     ?>
+                    <tr>
+                      <td><?php echo $row['id']; ?></td>
+                      <td><?php echo $row['judul']; ?></td>
+                      <td><?php echo $row['nama']; ?></td>
+                      <td><?php echo $row['komentar']; ?></td>
+                      <td>
+                        <a onclick="return confirm('Hapus Komentar <?php echo $row['nama']; ?>?')" href="<?php echo $link; ?>/proses/crud-artikel.php?hapuskomen=<?php echo $row['id'] ?>"><button type="button" class="btn btn-sm btn-danger">Hapus</button></a>
+                      </td>
+                    </tr>
+                    <?php } ?>
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
           </div>
          </section>
          <!-- footer -->
-         <div class="footer" style="margin-top:6px">
+         <div class="footer" style="margin-top:200px">
             <div class="pull-right d-none d-sm-inline-block">Kajian Makassar
             </div>
             &copy; 2018 - <a href="#">Halaman Admin Kajian Makassar</a>

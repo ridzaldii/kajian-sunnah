@@ -7,9 +7,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <?php 
     include "connect.php";
     session_start();
-    if (isset($_SESSION['username'])) {
+    if (isset($_SESSION['nama_user'])) {
       header('location:'.$link);
-    }elseif (!isset($_SESSION['username'])) {
+    }elseif (!isset($_SESSION['nama_user'])) {
 
  ?>
 <!DOCTYPE html>

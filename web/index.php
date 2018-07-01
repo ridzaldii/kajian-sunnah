@@ -7,9 +7,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <?php 
 include "connect.php";
 session_start();
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['nama_user'])) {
   header('location:'.$link.'/login.php');
-}elseif (isset($_SESSION['username'])) {
+}elseif (isset($_SESSION['nama_user'])) {
   $queryj = "SELECT * FROM jadwal_kajian";
   $queryr = "SELECT * FROM rekaman_kajian";
   $querya = "SELECT * FROM artikel_kajian";
@@ -72,7 +72,7 @@ if (!isset($_SESSION['username'])) {
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <img alt="" src="images/2.png">
-                            <span class="username"><?php echo $_SESSION['nama']; ?></span>
+                            <span class="username"><?php echo $_SESSION['nama_user']; ?></span>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">
@@ -126,6 +126,7 @@ if (!isset($_SESSION['username'])) {
                           <ul class="sub">
                             <li><a href="tambahartikel.php">Tambah Artikel</a></li>
                             <li><a href="artikelkajian.php">Kelola Artikel</a></li>
+                            <li><a href="komentarartikel.php">Kelola Komentar</a></li>
                           </ul>
                         </li>
                         <li class="sub-menu">
@@ -208,11 +209,11 @@ if (!isset($_SESSION['username'])) {
 </div>
 </section>
 <!-- footer -->
-<div class="footer">
-   <div class="wthree-copyright">
-     <p>© 2017 Visitors. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
- </div>
-</div>
+ <div class="footer" style="position:fixed">
+    <div class="pull-right d-none d-sm-inline-block">Kajian Makassar
+    </div>
+    &copy; 2018 - <a href="#">Halaman Admin Kajian Makassar</a>
+  </div>
 <!-- / footer -->
 </section>
 <!--main content end-->

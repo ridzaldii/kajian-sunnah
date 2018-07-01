@@ -2,8 +2,8 @@
 
 class Connection {
     function getLink(){
-        $ip = "192.168.121.145";
-        $link = "http://".$ip."/kajian-sunnah/web/images/Donasi/";        
+        $ip = "172.20.100.14";
+        $link = "http://".$ip."/kajian-sunnah/web/";        
         return $link;
     }
     function getConnection(){
