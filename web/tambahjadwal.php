@@ -50,7 +50,7 @@ if (!isset($_SESSION['nama_user'])) {
             <!--logo start-->
             <div class="brand">
                 <a href="index.php" class="logo">
-                    KAJIAN
+                    <b><img src="images/text-logo.png" style="width:80px;left:50%;top:50%;position:absolute;margin-top:-30px;margin-left:-40px" alt=""></b>
                 </a>
                 <div class="sidebar-toggle-box">
                     <div class="fa fa-bars"></div>
