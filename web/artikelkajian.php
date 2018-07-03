@@ -163,6 +163,7 @@ if (!isset($_SESSION['nama_user'])) {
                       <th>Pembicara</th>
                       <th data-breakpoints="xs">Deksripsi</th>
                       <th >Kategori</th>
+                      <th data-breakpoints="xs">Waktu Upload</th>
                       <th >Action</th>
                     </tr>
                   </thead>
@@ -177,8 +178,9 @@ if (!isset($_SESSION['nama_user'])) {
                       <td><?php echo $row['id']; ?></td>
                       <td><?php echo $row['judul']; ?></td>
                       <td><?php echo $row['pembicara']; ?></td>
-                      <td><?php echo $row['deskripsi']; ?></td>
+                      <td data-breakpoints="xs"><?php echo $row['deskripsi']; ?></td>
                       <td><?php echo $row['kategori']; ?></td>
+                      <td><?php echo $row['tanggal'].", ".$row['jam']; ?></td>
                       <td>
                         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal<?php echo $row['id'] ?>">Edit</button>
                         <a onclick="return confirm('Hapus Artikel <?php echo $row['judul']; ?>?')" href="<?php echo $link; ?>/proses/crud-artikel.php?hapus=<?php echo $row['id'] ?>"><button type="button" class="btn btn-sm btn-danger">Hapus</button></a>

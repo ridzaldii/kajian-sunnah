@@ -7,7 +7,7 @@
 		$deskripsi			= $_POST['deskripsi'];
 		$kategori			= $_POST['kategori'];
 
-		$query 		= "INSERT INTO artikel_kajian VALUES('', '$judul', '$pembicara','$deskripsi','$kategori')";
+		$query 		= "INSERT INTO artikel_kajian VALUES('', '$judul', '$pembicara','$deskripsi','$kategori',now(),now())";
 
 		$result 	= $conn->query($query);
 		if ($result) {

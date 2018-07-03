@@ -29,7 +29,9 @@ class JsonDisplayMarker {
                             'id'=>$data1['id'],
                             'id_artikel'=>$data1['id_artikel'],
                             'nama'=>$data1['nama'],
-                            'komentar'=>$data1['komentar']
+                            'komentar'=>$data1['komentar'],
+                            'tanggal'=>$data1['tanggal'],
+                            'jam'=>$data1['jam']
                             )
                         );
                 }
@@ -40,6 +42,8 @@ class JsonDisplayMarker {
                         'pembicara'=>$data['pembicara'],
                         'deskripsi'=>$data['deskripsi'],
                         'kategori'=>$data['kategori'],
+                        'tanggal'=>$data['tanggal'],
+                        'jam'=>$data['jam'],
                         'komentar'=>$response1
                         )
                     );

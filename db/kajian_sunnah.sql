@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 01, 2018 at 11:21 AM
+-- Generation Time: Jul 03, 2018 at 02:29 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -42,7 +42,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `nama`, `alamat`, `email`, `username`, `password`) VALUES
-(1, 'aksan', 'btp', 'aksan@gmail.com', 'aksanji', '202cb962ac59075b964b07152d234b70');
+(1, 'Fadel', 'btp', 'fadel@gmail.com', 'fadelm', '202cb962ac59075b964b07152d234b70');
 
 -- --------------------------------------------------------
 
@@ -55,16 +55,18 @@ CREATE TABLE `artikel_kajian` (
   `judul` varchar(500) NOT NULL,
   `pembicara` varchar(250) NOT NULL,
   `deskripsi` text CHARACTER SET utf8 NOT NULL,
-  `kategori` enum('aqidah','tauhid','fikih','tematik') NOT NULL
+  `kategori` enum('aqidah','tauhid','fikih','tematik') NOT NULL,
+  `tanggal` date NOT NULL,
+  `jam` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `artikel_kajian`
 --
 
-INSERT INTO `artikel_kajian` (`id`, `judul`, `pembicara`, `deskripsi`, `kategori`) VALUES
-(1, 'Syarat sah salat', 'Ustads inia', '\"(Syarat dalam bab shalat ialah) hal-hal yang menjadi penentu keabsahan shalat, namun bukan bagian dari shalat. Berbeda dengan rukun yang merupakan bagian shalat.\"', 'fikih'),
-(2, 'Makhrijal Huruf', 'Yusu Mansyur', 'Pengucapan huruf hijaiyah', 'tauhid');
+INSERT INTO `artikel_kajian` (`id`, `judul`, `pembicara`, `deskripsi`, `kategori`, `tanggal`, `jam`) VALUES
+(1, 'Syarat sah salat', 'Ustads inia', '\"(Syarat dalam bab shalat ialah) hal-hal yang menjadi penentu keabsahan shalat, namun bukan bagian dari shalat. Berbeda dengan rukun yang merupakan bagian shalat.\"', 'fikih', '2018-07-01', '12:00:00'),
+(2, 'Makhrijal Huruf', 'Yusu Mansyur', 'Pengucapan huruf hijaiyah', 'tauhid', '2018-07-01', '16:00:00');
 
 -- --------------------------------------------------------
 
@@ -124,16 +126,19 @@ CREATE TABLE `komentar` (
   `id` int(11) NOT NULL,
   `id_artikel` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
-  `komentar` text NOT NULL
+  `komentar` text NOT NULL,
+  `tanggal` date NOT NULL,
+  `jam` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `komentar`
 --
 
-INSERT INTO `komentar` (`id`, `id_artikel`, `nama`, `komentar`) VALUES
-(1, 1, 'Ahmad', 'Sangat bermanfaat, syukran.'),
-(2, 2, 'Ahmad', 'asdfasdfadsf');
+INSERT INTO `komentar` (`id`, `id_artikel`, `nama`, `komentar`, `tanggal`, `jam`) VALUES
+(1, 1, 'Ahmad', 'Sangat bermanfaat, syukran.', '2018-07-01', '06:00:00'),
+(2, 2, 'Ahmad', 'asdfasdfadsf', '2018-07-02', '16:00:00'),
+(3, 2, 'Fadel', 'MasyaAllah', '2018-07-04', '11:25:00');
 
 -- --------------------------------------------------------
 

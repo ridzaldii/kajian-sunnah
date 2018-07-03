@@ -162,12 +162,13 @@ if (!isset($_SESSION['nama_user'])) {
                       <th>Kajian</th>
                       <th>Nama</th>
                       <th data-breakpoints="xs">Komentar</th>
+                      <th data-breakpoints="xs">Waktu Komentar</th>
                       <th >Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php 
-                      $query = "SELECT komentar.id, artikel_kajian.judul, komentar.nama, komentar.komentar FROM komentar inner join artikel_kajian WHERE komentar.id_artikel=artikel_kajian.id";
+                      $query = "SELECT komentar.id, artikel_kajian.judul, komentar.nama, komentar.komentar, komentar.tanggal, komentar.jam FROM komentar inner join artikel_kajian WHERE komentar.id_artikel=artikel_kajian.id";
                       $result = $conn->query($query);
 
                       while ($row = $result->fetch_assoc()) {
@@ -177,6 +178,7 @@ if (!isset($_SESSION['nama_user'])) {
                       <td><?php echo $row['judul']; ?></td>
                       <td><?php echo $row['nama']; ?></td>
                       <td><?php echo $row['komentar']; ?></td>
+                      <td><?php echo $row['tanggal'].", ".$row['jam']; ?></td>
                       <td>
                         <a onclick="return confirm('Hapus Komentar <?php echo $row['nama']; ?>?')" href="<?php echo $link; ?>/proses/crud-artikel.php?hapuskomen=<?php echo $row['id'] ?>"><button type="button" class="btn btn-sm btn-danger">Hapus</button></a>
                       </td>
