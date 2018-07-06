@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 03, 2018 at 02:29 PM
+-- Generation Time: Jul 06, 2018 at 08:31 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -105,6 +105,7 @@ CREATE TABLE `jadwal_kajian` (
   `waktu` time DEFAULT NULL,
   `hari` enum('Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu') NOT NULL,
   `tempat` varchar(500) NOT NULL,
+  `rutin` enum('Ya','Tidak') NOT NULL,
   `gambar` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -112,9 +113,10 @@ CREATE TABLE `jadwal_kajian` (
 -- Dumping data for table `jadwal_kajian`
 --
 
-INSERT INTO `jadwal_kajian` (`id`, `judul`, `ustadz`, `deskripsi`, `tanggal`, `waktu`, `hari`, `tempat`, `gambar`) VALUES
-(1, 'Syarat sah salat', 'Yusuf Mansyur', '\"(Syarat dalam bab shalat ialah) hal-hal yang menjadi penentu keabsahan shalat, namun bukan bagian dari shalat. Berbeda dengan rukun yang merupakan bagian shalat.\"', '2018-07-31', '15:00:00', 'Selasa', 'Masjid baiturahman', NULL),
-(2, 'Ceramah ramadhan 2', 'yusuf', 'ceramah ramadhan 2', '2018-06-28', '13:00:00', 'Kamis', 'Masjid nurul hijrah', NULL);
+INSERT INTO `jadwal_kajian` (`id`, `judul`, `ustadz`, `deskripsi`, `tanggal`, `waktu`, `hari`, `tempat`, `rutin`, `gambar`) VALUES
+(1, 'Syarat sah salat', 'Yusuf Mansyur', '\"(Syarat dalam bab shalat ialah) hal-hal yang menjadi penentu keabsahan shalat, namun bukan bagian dari shalat. Berbeda dengan rukun yang merupakan bagian shalat.\"', '2018-07-31', '15:00:00', 'Selasa', 'Masjid baiturahman', 'Ya', NULL),
+(2, 'Ceramah ramadhan 2', 'yusuf', 'ceramah ramadhan 2', '2018-06-28', '13:00:00', 'Kamis', 'Masjid nurul hijrah', 'Tidak', NULL),
+(3, 'Bersatu diatas Jalannya Rasul dan Para Sahabat', 'Abdurrahman Thoyyib, Lc', 'Tabligh Akbar Terbuka untuk umum', '2018-07-27', '07:25:00', 'Jumat', 'Masjid Al-Firdaus', 'Tidak', '1530881237-TABLIGH-AKBAR-730x1024.jpg');
 
 -- --------------------------------------------------------
 
@@ -138,7 +140,8 @@ CREATE TABLE `komentar` (
 INSERT INTO `komentar` (`id`, `id_artikel`, `nama`, `komentar`, `tanggal`, `jam`) VALUES
 (1, 1, 'Ahmad', 'Sangat bermanfaat, syukran.', '2018-07-01', '06:00:00'),
 (2, 2, 'Ahmad', 'asdfasdfadsf', '2018-07-02', '16:00:00'),
-(3, 2, 'Fadel', 'MasyaAllah', '2018-07-04', '11:25:00');
+(3, 2, 'Fadel', 'MasyaAllah', '2018-07-04', '11:25:00'),
+(4, 2, 'Fadel', 'Subhanallah', '2018-07-03', '20:30:08');
 
 -- --------------------------------------------------------
 
@@ -157,7 +160,8 @@ CREATE TABLE `rekaman_kajian` (
 --
 
 INSERT INTO `rekaman_kajian` (`id`, `judul`, `rekaman`) VALUES
-(6, 'asdasd', '1530361760-01_c.wav');
+(6, 'asdasd', '1530361760-01_c.wav'),
+(7, 'Debat', '1530901256-Debat Islam & Kristen(03).mp3');
 
 --
 -- Indexes for dumped tables
@@ -221,25 +225,25 @@ ALTER TABLE `artikel_kajian`
 -- AUTO_INCREMENT for table `donasi`
 --
 ALTER TABLE `donasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `jadwal_kajian`
 --
 ALTER TABLE `jadwal_kajian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `komentar`
 --
 ALTER TABLE `komentar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `rekaman_kajian`
 --
 ALTER TABLE `rekaman_kajian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
