@@ -9,18 +9,54 @@
 		$hari				= $_POST['hari'];
 		$jam		= $_POST['waktu'].":00";
 		$tempat 				= $_POST['tempat'];
+		$rutin 				= $_POST['rutin'];
 
-		$query 		= "INSERT INTO jadwal_kajian VALUES('', '$judul', '$ustadz','$deskripsi','$tanggal','$jam','$hari','$tempat')";
+		$file		= time()."-".$_FILES['gambar']['name'];
+		$filetmp 		= $_FILES['gambar']['tmp_name'];
 
-		$result 	= $conn->query($query);
-		if ($result) {
-			echo "<script>
-						alert('Berhasil');
-						window.location='".$link."/jadwalkajian.php';
-						</script>";
+		if(move_uploaded_file($filetmp, '../images/poster/'.$file)){
+			$query 		= "INSERT INTO jadwal_kajian VALUES('', '$judul', '$ustadz','$deskripsi','$tanggal','$jam','$hari','$tempat','$rutin','$file')";
+
+			$result 	= $conn->query($query);
+			if ($result) {
+				echo "<script>
+							alert('Berhasil.');
+							window.location='".$link."/jadwalkajian.php';
+							</script>";
+			}else{
+				echo $conn->error;
+				echo "error";
+			}
 		}else{
-			echo $conn->error;
-			echo "error";
+			echo "Failed to upload file.";
+		}
+	} elseif (isset($_POST['submit1'])) {
+		$judul 				= $_POST['judul'];
+		$ustadz		= $_POST['ustadz'];
+		$deskripsi			= $_POST['deskripsi'];
+		$hari				= $_POST['shari'];
+		$jam		= $_POST['waktu'].":00";
+		$tempat 				= $_POST['tempat'];
+		$rutin 				= $_POST['rutin'];
+
+		$file		= time()."-".$_FILES['gambar']['name'];
+		$filetmp 		= $_FILES['gambar']['tmp_name'];
+
+		if(move_uploaded_file($filetmp, '../images/poster/'.$file)){
+			$query 		= "INSERT INTO jadwal_kajian VALUES('', '$judul', '$ustadz','$deskripsi','','$jam','$hari','$tempat','$rutin','$file')";
+
+			$result 	= $conn->query($query);
+			if ($result) {
+				echo "<script>
+							alert('Berhasil');
+							window.location='".$link."/jadwalkajian.php';
+							</script>";
+			}else{
+				echo $conn->error;
+				echo "error";
+			}
+		}else{
+			echo "Failed to upload file.";
 		}
 	} elseif (isset($_GET['hapus'])) {
 		$query = "DELETE FROM jadwal_kajian WHERE id='".$_GET['hapus']."'";

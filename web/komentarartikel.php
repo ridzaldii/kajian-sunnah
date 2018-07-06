@@ -145,8 +145,24 @@ if (!isset($_SESSION['nama_user'])) {
               <div class="panel-heading">
                Kelola Komentar Artikel
               </div>
+              <div class="row w3-res-tb">
+                <div class="col-sm-2 m-b-xs">
+                  <select id="indeks" onchange="FunctionOnChange()" class="input-sm form-control w-sm inline v-middle">
+                    <option value="0">Cari Berdasarkan ..</option>
+                    <option value="1">Kajian</option>
+                    <option value="2">Nama</option>
+                    <option value="3">Komentar</option>
+                    <option value="4">Waktu Komentar</option>
+                  </select>                
+                </div>
+                <div class="col-sm-3">
+                  <div class="input-group">
+                    <input id="myInput" type="text" onkeyup="myFunction()" class="input-sm form-control" placeholder="Cari .." disabled>
+                  </div>
+                </div>
+              </div>
               <div>
-                <table class="table" ui-jq="footable" ui-options='{
+                <table id="myTable" class="table" ui-jq="footable" ui-options='{
                   "paging": {
                     "enabled": true
                   },
@@ -295,6 +311,43 @@ $(window).load( function() {
 });
 </script>
 <!-- //calendar -->
+<!-- search -->
+<script>
+function FunctionOnChange(){
+  var select, input;
+  select = document.getElementById("indeks");
+  input = document.getElementById("myInput");
+  filter = select.value;
+  if (filter==0) {
+    input.disabled=true;
+  }else{
+    input.disabled=false;
+  };
+}
+
+function myFunction() {
+  // Declare variables 
+  var input, filter, table, tr, td, i, indeks;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  indeks = document.getElementById('indeks').value;
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[indeks];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
+}
+</script>
+<!-- end search -->
 </body>
 </html>
 <?php 

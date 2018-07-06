@@ -10,6 +10,8 @@ class JsonDisplayMarker {
         $response = array();
         $code = "code";
         $message = "message";
+
+        $link = $connection->getLink();
         try{
             //tampilkan semua data dari mysql
             $queryMarker = "SELECT * FROM jadwal_kajian";
@@ -27,7 +29,8 @@ class JsonDisplayMarker {
                         'waktu'=>$data['waktu'],
                         'hari'=>$data['hari'],
                         'alamat'=>$data['tempat'],
-                        'gambar'=>$data['gambar'])
+                        'rutin'=>$data['rutin'],
+                        'gambar'=>$link.'images/poster/'.$data['gambar'])
                     );
             }
         }catch (PDOException $e){

@@ -152,11 +152,11 @@ if (!isset($_SESSION['nama_user'])) {
                   <form role="form" class="form-horizontal bucket-form" action="proses/crud-rekaman.php" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="judul">Judul Kajian</label>
-                        <input type="text" id="judul" name="judul" class="form-control">
+                        <input type="text" id="judul" name="judul" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="filerekaman">Input File Rekaman</label>
-                        <input type="file" id="rekaman" name="rekaman" class="form-control">
+                        <input type="file" id="rekaman" name="rekaman" class="form-control" required>
                     </div>
                     </div>
                     <div class="position-center">
@@ -172,7 +172,7 @@ if (!isset($_SESSION['nama_user'])) {
           </div>
          </section>
          <!-- footer -->
-         <div class="footer">
+         <div class="footer" style="margin-top:50px">
             <div class="pull-right d-none d-sm-inline-block">Kajian Makassar
             </div>
             &copy; 2018 - <a href="#">Halaman Admin Kajian Makassar</a>

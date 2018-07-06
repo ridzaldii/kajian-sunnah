@@ -27,6 +27,32 @@
         </div>
       </div>
       <div class="form-group">
+          <label class="col-sm-3 control-label col-lg-3" for="inputSuccess">Rutin</label>
+          <div class="col-lg-6">
+            <select id="rutin" name="rutin" onchange="functionChange()" class="form-control" disabled>
+              <?php if ($row['rutin']=='Ya') {
+                ?>
+                <option value="Ya" selected>Ya</option>
+                <option value="Tidak">Tidak</option>
+                <?php
+              } elseif ($row['rutin']=='Tidak') {
+                ?>
+                <option value="Ya">Ya</option>
+                <option value="Tidak" selected>Tidak</option>
+                <?php
+              } ?>
+            </select>
+          </div>
+      </div>
+      <?php if ($row['rutin']=='Ya') {
+        ?>
+      <div class="form-group" id="inTgl" style="display:none">
+        <?php
+      } elseif ($row['rutin']=='Tidak') {
+        ?>
+      <div class="form-group" id="inTgl">
+        <?php
+      } ?>
         <label class="col-sm-3 control-label">Tanggal</label>
         <div class="col-sm-4">
           <input id="date_picker" type="date" class="form-control" value="<?php echo $row['tanggal'] ?>">
@@ -35,6 +61,92 @@
         <label class="col-sm-1 control-label">Hari</label>
         <div class="col-sm-2">
           <input type="text" id="hari" name="hari" class="form-control" value="<?php echo $row['hari'] ?>" readonly>
+        </div>
+      </div>
+      <?php if ($row['rutin']=='Ya') {
+        ?>
+      <div class="form-group" id="inHari">
+        <?php
+      } elseif ($row['rutin']=='Tidak') {
+        ?>
+      <div class="form-group" id="inHari" style="display:none">
+        <?php
+      } ?>
+        <label class="col-sm-3 control-label">Hari</label>
+        <div class="col-lg-6">
+          <select name="hari" class="form-control">
+            <?php if ($row['hari']=='Senin') {
+              ?>
+              <option value="Senin" selected>Senin</option>
+              <option value="Selasa">Selasa</option>
+              <option value="Rabu">Rabu</option>
+              <option value="Kamis">Kamis</option>
+              <option value="Jumat">Jumat</option>
+              <option value="Sabtu">Sabtu</option>
+              <option value="Minggu">Minggu</option>
+              <?php
+            } elseif ($row['hari']=='Selasa') {
+              ?>
+              <option value="Senin">Senin</option>
+              <option value="Selasa" selected>Selasa</option>
+              <option value="Rabu">Rabu</option>
+              <option value="Kamis">Kamis</option>
+              <option value="Jumat">Jumat</option>
+              <option value="Sabtu">Sabtu</option>
+              <option value="Minggu">Minggu</option>
+              <?php
+            } elseif ($row['hari']=='Rabu') {
+              ?>
+              <option value="Senin">Senin</option>
+              <option value="Selasa">Selasa</option>
+              <option value="Rabu" selected>Rabu</option>
+              <option value="Kamis">Kamis</option>
+              <option value="Jumat">Jumat</option>
+              <option value="Sabtu">Sabtu</option>
+              <option value="Minggu">Minggu</option>
+              <?php
+            } elseif ($row['hari']=='Kamis') {
+              ?>
+              <option value="Senin">Senin</option>
+              <option value="Selasa">Selasa</option>
+              <option value="Rabu">Rabu</option>
+              <option value="Kamis" selected>Kamis</option>
+              <option value="Jumat">Jumat</option>
+              <option value="Sabtu">Sabtu</option>
+              <option value="Minggu">Minggu</option>
+              <?php
+            } elseif ($row['hari']=='Jumat') {
+              ?>
+              <option value="Senin">Senin</option>
+              <option value="Selasa">Selasa</option>
+              <option value="Rabu">Rabu</option>
+              <option value="Kamis">Kamis</option>
+              <option value="Jumat" selected>Jumat</option>
+              <option value="Sabtu">Sabtu</option>
+              <option value="Minggu">Minggu</option>
+              <?php
+            } elseif ($row['hari']=='Sabtu') {
+              ?>
+              <option value="Senin">Senin</option>
+              <option value="Selasa">Selasa</option>
+              <option value="Rabu">Rabu</option>
+              <option value="Kamis">Kamis</option>
+              <option value="Jumat">Jumat</option>
+              <option value="Sabtu" selected>Sabtu</option>
+              <option value="Minggu">Minggu</option>
+              <?php
+            } elseif ($row['hari']=='Minggu') {
+              ?>
+              <option value="Senin">Senin</option>
+              <option value="Selasa">Selasa</option>
+              <option value="Rabu">Rabu</option>
+              <option value="Kamis">Kamis</option>
+              <option value="Jumat">Jumat</option>
+              <option value="Sabtu">Sabtu</option>
+              <option value="Minggu" selected>Minggu</option>
+              <?php
+            } ?>
+          </select>
         </div>
       </div>
       <div class="form-group">

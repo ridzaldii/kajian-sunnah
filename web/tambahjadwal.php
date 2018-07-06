@@ -151,7 +151,7 @@ if (!isset($_SESSION['nama_user'])) {
                   Tambah Jadwal
                 </header>
                 <div class="panel-body">
-                  <form class="form-horizontal bucket-form" action="proses/crud-jadwal.php" method="post">
+                  <form class="form-horizontal bucket-form" action="proses/crud-jadwal.php" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                       <label class="col-sm-3 control-label">Judul</label>
                       <div class="col-sm-6">
@@ -171,6 +171,29 @@ if (!isset($_SESSION['nama_user'])) {
                       </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-sm-3 control-label col-lg-3" for="inputSuccess">Rutin</label>
+                        <div class="col-lg-6">
+                          <select id="sRutin" name="rutin" onchange="functionChange()" class="form-control">
+                            <option value="Ya">Ya</option>
+                            <option value="Tidak">Tidak</option>
+                          </select>
+                        </div>
+                    </div>
+                    <div class="form-group" id="inHari">
+                        <label class="col-sm-3 control-label col-lg-3" for="inputSuccess">Hari</label>
+                        <div class="col-lg-6">
+                          <select name="shari" class="form-control">
+                            <option value="Senin">Senin</option>
+                            <option value="Selasa">Selasa</option>
+                            <option value="Rabu">Rabu</option>
+                            <option value="Kamis">Kamis</option>
+                            <option value="Jumat">Jumat</option>
+                            <option value="Sabtu">Sabtu</option>
+                            <option value="Minggu">Minggu</option>
+                          </select>
+                        </div>
+                    </div>
+                    <div class="form-group" id="inTgl" style="display:none;">
                       <label class="col-sm-3 control-label">Tanggal</label>
                       <div class="col-sm-3">
                         <input id="date_picker" type="date" class="form-control">
@@ -184,7 +207,7 @@ if (!isset($_SESSION['nama_user'])) {
                     <div class="form-group">
                       <label class="col-sm-3 control-label">Jam</label>
                       <div class="col-sm-3">
-                        <input type="text" id="timep" name="waktu" class="form-control">
+                        <input type="text" id="timep" autocomplete="off" name="waktu" class="form-control">
                       </div>
                     </div>
                     <div class="form-group">
@@ -193,9 +216,15 @@ if (!isset($_SESSION['nama_user'])) {
                         <input type="text" name="tempat" class="form-control">
                       </div>
                     </div>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">Poster</label>
+                      <div class="col-sm-6">
+                        <input type="file" id="gambar" name="gambar" class="form-control" required>
+                      </div>
+                    </div>
                     <div class="position-center">
                       <div class="text-center">
-                          <button type="submit" name="submit" class="btn btn-success">Submit</button>
+                          <button type="submit" id="submit" name="submit1" class="btn btn-success">Submit</button>
                       </div>
                     </div>
                   </form>
@@ -362,6 +391,26 @@ timepicker.on('change', function(evt) {
 });
 </script>
 <!-- timepicker end -->
+
+<script>
+  function functionChange(){
+    var rutin, inTgl, inHari;
+    rutin = document.getElementById('sRutin').value;
+    inTgl = document.getElementById('inTgl');
+    inHari = document.getElementById('inHari');
+    submit = document.getElementById('submit');
+
+    if (rutin=="Tidak") {
+      inTgl.setAttribute('style','display:');
+      inHari.setAttribute('style','display:none');
+      submit.setAttribute('name','submit');
+    }else if(rutin=="Ya"){
+      inTgl.setAttribute('style','display:none');
+      inHari.setAttribute('style','display:');
+      submit.setAttribute('name','submit1');
+    };
+  }
+</script>
 </body>
 </html>
 <?php 

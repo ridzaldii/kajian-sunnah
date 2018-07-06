@@ -58,7 +58,7 @@ if (!isset($_SESSION['nama_user'])) {
                 <!--search & user info start-->
                 <ul class="nav pull-right top-menu">
                     <li>
-                        <input type="text" class="form-control search" placeholder=" Search">
+                        <input type="text" id="" class="form-control search" placeholder=" Search">
                     </li>
                     <!-- user login dropdown start-->
                     <li class="dropdown">
@@ -145,8 +145,28 @@ if (!isset($_SESSION['nama_user'])) {
               <div class="panel-heading">
                Jadwal Kajian
               </div>
+              <div class="row w3-res-tb">
+                <div class="col-sm-2 m-b-xs">
+                  <select id="indeks" onchange="FunctionOnChange()" class="input-sm form-control w-sm inline v-middle">
+                    <option value="0">Cari Berdasarkan ..</option>
+                    <option value="1">Judul</option>
+                    <option value="2">Ustadz</option>
+                    <option value="3">Deskripsi</option>
+                    <option value="4">Tanggal</option>
+                    <option value="5">Hari</option>
+                    <option value="6">Waktu</option>
+                    <option value="7">Lokasi</option>
+                    <option value="8">Rutin</option>
+                  </select>                
+                </div>
+                <div class="col-sm-3">
+                  <div class="input-group">
+                    <input id="myInput" type="text" onkeyup="myFunction()" class="input-sm form-control" placeholder="Cari .." disabled>
+                  </div>
+                </div>
+              </div>
               <div>
-                <table class="table" ui-jq="footable" ui-options='{
+                <table class="table" id="myTable" ui-jq="footable" ui-options='{
                   "paging": {
                     "enabled": true
                   },
@@ -164,8 +184,10 @@ if (!isset($_SESSION['nama_user'])) {
                       <th data-breakpoints="xs">Deksripsi</th>
                      
                       <th >Tanggal</th>
+                      <th >Hari</th>
                       <th >Waktu</th>
                       <th >Lokasi</th>
+                      <th >Rutin</th>
                       <th >Action</th>
                     </tr>
                   </thead>
@@ -182,14 +204,20 @@ if (!isset($_SESSION['nama_user'])) {
                       <td><?php echo $row['ustadz']; ?></td>
                       <td><?php echo $row['deskripsi']; ?></td>
                       <td><?php echo $row['tanggal']; ?></td>
+                      <td><?php echo $row['hari']; ?></td>
                       <td><?php echo $row['waktu']; ?></td>
                       <td><?php echo $row['tempat']; ?></td>
+                      <td><?php echo $row['rutin']; ?></td>
                       <td>
+                        <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#myModal1<?php echo $row['id'] ?>">Lihat Poster</button>
                         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal<?php echo $row['id'] ?>">Edit</button>
                         <a onclick="return confirm('Hapus Jadwal Kajian <?php echo $row['judul']; ?>?')" href="<?php echo $link; ?>/proses/crud-jadwal.php?hapus=<?php echo $row['id'] ?>"><button type="button" class="btn btn-sm btn-danger">Hapus</button></a>
                         <!-- Modal Start -->
                         <div id="myModal<?php echo $row['id']; ?>" class="modal fade" role="dialog">
                                 <?php include "pages/modal-jadwal.php"; ?>
+                        </div>
+                        <div id="myModal1<?php echo $row['id']; ?>" class="modal fade" role="dialog">
+                                <?php include "pages/modal-poster.php"; ?>
                         </div>
                          <!-- Modal End -->
                       </td>
@@ -306,6 +334,43 @@ $(window).load( function() {
 });
 </script>
 <!-- //calendar -->
+<!-- search -->
+<script>
+function FunctionOnChange(){
+  var select, input;
+  select = document.getElementById("indeks");
+  input = document.getElementById("myInput");
+  filter = select.value;
+  if (filter==0) {
+    input.disabled=true;
+  }else{
+    input.disabled=false;
+  };
+}
+
+function myFunction() {
+  // Declare variables 
+  var input, filter, table, tr, td, i, indeks;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  indeks = document.getElementById('indeks').value;
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[indeks];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
+}
+</script>
+<!-- end search -->
 </body>
 </html>
 <?php 
