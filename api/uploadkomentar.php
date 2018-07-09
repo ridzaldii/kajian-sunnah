@@ -13,7 +13,7 @@ if (isset($_POST['id_artikel']) && isset($_POST['nama']) && isset($_POST['koment
  $nama = htmlspecialchars($_POST['nama']);
  $komentar = htmlspecialchars($_POST['komentar']);
         
- $sql = $MySQLiconn->query("INSERT INTO komentar VALUES ('','$id_artikel','$nama','$komentar',now(),now())");
+ $sql = $MySQLiconn->query("INSERT INTO komentar VALUES ('','$id_artikel','$nama','$komentar','0',now(),now())");
 
      if($sql) {
          $response["error"] = FALSE;

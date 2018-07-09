@@ -23,7 +23,10 @@ class JsonDisplayMarker {
                     array(
                         'id'=>$data['id'],
                         'judul'=>$data['judul'],
-                        'rekaman'=>$link.'file/'.$data['rekaman'])
+                        'rekaman'=>$link.'file/'.$data['rekaman'],
+                        'deskripsi'=>$data['deskripsi'],
+                        'tanggal'=>$data['tanggal'],
+                        'jam'=>$data['jam'])
                     );
             }
         }catch (PDOException $e){

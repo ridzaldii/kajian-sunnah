@@ -162,16 +162,8 @@ if (!isset($_SESSION['nama_user'])) {
                 </div>
               </div>
               <div>
-                <table id="myTable" class="table" ui-jq="footable" ui-options='{
-                  "paging": {
-                    "enabled": true
-                  },
-                  "filtering": {
-                    "enabled": true
-                  },
-                  "sorting": {
-                    "enabled": true
-                  }}'>
+                <div class="table-responsive">
+                <table id="myTable" class="table table-striped b-t b-light">
                   <thead>
                     <tr>
                       <th data-breakpoints="xs">ID</th>
@@ -179,29 +171,48 @@ if (!isset($_SESSION['nama_user'])) {
                       <th>Nama</th>
                       <th data-breakpoints="xs">Komentar</th>
                       <th data-breakpoints="xs">Waktu Komentar</th>
+                      <th >Status</th>
                       <th >Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php 
-                      $query = "SELECT komentar.id, artikel_kajian.judul, komentar.nama, komentar.komentar, komentar.tanggal, komentar.jam FROM komentar inner join artikel_kajian WHERE komentar.id_artikel=artikel_kajian.id";
+                      $query = "SELECT komentar.id, artikel_kajian.judul, komentar.nama, komentar.komentar, komentar.tanggal, komentar.jam,komentar.status FROM komentar inner join artikel_kajian WHERE komentar.id_artikel=artikel_kajian.id";
                       $result = $conn->query($query);
 
                       while ($row = $result->fetch_assoc()) {
                      ?>
                     <tr>
                       <td><?php echo $row['id']; ?></td>
-                      <td><?php echo $row['judul']; ?></td>
+                      <td>
+                        <div class="table-cell-inner"> <?php echo $row['judul']; ?></div> 
+                      </td>
                       <td><?php echo $row['nama']; ?></td>
                       <td><?php echo $row['komentar']; ?></td>
                       <td><?php echo $row['tanggal'].", ".$row['jam']; ?></td>
                       <td>
+                        <?php 
+                          if ($row['status']==1) {
+                            echo "Tervalidasi";
+                          } elseif ($row['status']==0) {
+                            echo "Belum Divalidasi";
+                          }
+                         ?>
+                      </td>
+                      <td>
                         <a onclick="return confirm('Hapus Komentar <?php echo $row['nama']; ?>?')" href="<?php echo $link; ?>/proses/crud-artikel.php?hapuskomen=<?php echo $row['id'] ?>"><button type="button" class="btn btn-sm btn-danger">Hapus</button></a>
+                        <?php 
+                          if ($row['status']==0) {
+                            echo "<a href='".$link."/proses/crud-artikel.php?kode=v&validasi=".$row['id']."'><button type='button' class='btn btn-sm btn-success'>Validasi</button></a>";
+                          } elseif ($row['status']==1) {
+                            echo "<a href='".$link."/proses/crud-artikel.php?kode=u&validasi=".$row['id']."'><button type='button' class='btn btn-sm btn-warning'>Batal Validasi</button></a>";
+                          }
+                         ?>
                       </td>
                     </tr>
                     <?php } ?>
                   </tbody>
-                </table>
+                </table></div> 
               </div>
             </div>
           </div>

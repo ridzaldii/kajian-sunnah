@@ -158,6 +158,10 @@ if (!isset($_SESSION['nama_user'])) {
                         <label for="filerekaman">Input File Rekaman</label>
                         <input type="file" id="rekaman" name="rekaman" class="form-control" required>
                     </div>
+                    <div class="form-group">
+                      <label>Deskripsi</label>
+                        <textarea type="text" name="deskripsi" class="md-textarea form-control" rows="3"></textarea>
+                    </div>
                     </div>
                     <div class="position-center">
                       <div class="text-center">

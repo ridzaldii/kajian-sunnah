@@ -222,6 +222,21 @@ if (!isset($_SESSION['nama_user'])) {
                         <input type="file" id="gambar" name="gambar" class="form-control" required>
                       </div>
                     </div>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">Nama Panitia</label>
+                      <div class="col-sm-6">
+                        <input type="text" name="panitia" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">Nomor Kontak</label>
+                      <div class="col-sm-1">
+                        <input type="text" class="form-control" value="+62" disabled>
+                      </div>
+                      <div class="col-sm-5">
+                        <input type="number" name="kontak" class="form-control">
+                      </div>
+                    </div>
                     <div class="position-center">
                       <div class="text-center">
                           <button type="submit" id="submit" name="submit1" class="btn btn-success">Submit</button>

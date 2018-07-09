@@ -1,9 +1,9 @@
--- phpMyAdmin SQL Dumpaaa
+-- phpMyAdmin SQL Dump
 -- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2018 at 08:31 PM
+-- Generation Time: Jul 09, 2018 at 02:19 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -106,17 +106,19 @@ CREATE TABLE `jadwal_kajian` (
   `hari` enum('Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu') NOT NULL,
   `tempat` varchar(500) NOT NULL,
   `rutin` enum('Ya','Tidak') NOT NULL,
-  `gambar` text
+  `gambar` text,
+  `panitia` varchar(50) NOT NULL,
+  `kontak` varchar(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `jadwal_kajian`
 --
 
-INSERT INTO `jadwal_kajian` (`id`, `judul`, `ustadz`, `deskripsi`, `tanggal`, `waktu`, `hari`, `tempat`, `rutin`, `gambar`) VALUES
-(1, 'Syarat sah salat', 'Yusuf Mansyur', '\"(Syarat dalam bab shalat ialah) hal-hal yang menjadi penentu keabsahan shalat, namun bukan bagian dari shalat. Berbeda dengan rukun yang merupakan bagian shalat.\"', '2018-07-31', '15:00:00', 'Selasa', 'Masjid baiturahman', 'Ya', NULL),
-(2, 'Ceramah ramadhan 2', 'yusuf', 'ceramah ramadhan 2', '2018-06-28', '13:00:00', 'Kamis', 'Masjid nurul hijrah', 'Tidak', NULL),
-(3, 'Bersatu diatas Jalannya Rasul dan Para Sahabat', 'Abdurrahman Thoyyib, Lc', 'Tabligh Akbar Terbuka untuk umum', '2018-07-27', '07:25:00', 'Jumat', 'Masjid Al-Firdaus', 'Tidak', '1530881237-TABLIGH-AKBAR-730x1024.jpg');
+INSERT INTO `jadwal_kajian` (`id`, `judul`, `ustadz`, `deskripsi`, `tanggal`, `waktu`, `hari`, `tempat`, `rutin`, `gambar`, `panitia`, `kontak`) VALUES
+(1, 'Syarat sah salat', 'Yusuf Mansyur', '\"(Syarat dalam bab shalat ialah) hal-hal yang menjadi penentu keabsahan shalat, namun bukan bagian dari shalat. Berbeda dengan rukun yang merupakan bagian shalat.\"', '2018-07-31', '15:00:00', 'Selasa', 'Masjid baiturahman', 'Ya', NULL, 'AAA', '82291760763'),
+(2, 'Ceramah ramadhan 2', 'yusuf', 'ceramah ramadhan 2', '2018-06-28', '13:00:00', 'Kamis', 'Masjid nurul hijrah', 'Tidak', NULL, '', ''),
+(3, 'Bersatu diatas Jalannya Rasul dan Para Sahabat', 'Abdurrahman Thoyyib, Lc', 'Tabligh Akbar Terbuka untuk umum', '2018-07-27', '07:25:00', 'Jumat', 'Masjid Al-Firdaus', 'Tidak', '1530881237-TABLIGH-AKBAR-730x1024.jpg', '', '');
 
 -- --------------------------------------------------------
 
@@ -129,6 +131,7 @@ CREATE TABLE `komentar` (
   `id_artikel` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `komentar` text NOT NULL,
+  `status` enum('0','1') NOT NULL DEFAULT '0',
   `tanggal` date NOT NULL,
   `jam` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -137,11 +140,11 @@ CREATE TABLE `komentar` (
 -- Dumping data for table `komentar`
 --
 
-INSERT INTO `komentar` (`id`, `id_artikel`, `nama`, `komentar`, `tanggal`, `jam`) VALUES
-(1, 1, 'Ahmad', 'Sangat bermanfaat, syukran.', '2018-07-01', '06:00:00'),
-(2, 2, 'Ahmad', 'asdfasdfadsf', '2018-07-02', '16:00:00'),
-(3, 2, 'Fadel', 'MasyaAllah', '2018-07-04', '11:25:00'),
-(4, 2, 'Fadel', 'Subhanallah', '2018-07-03', '20:30:08');
+INSERT INTO `komentar` (`id`, `id_artikel`, `nama`, `komentar`, `status`, `tanggal`, `jam`) VALUES
+(1, 1, 'Ahmad', 'Sangat bermanfaat, syukran.', '1', '2018-07-01', '06:00:00'),
+(2, 2, 'Ahmad', 'asdfasdfadsf', '0', '2018-07-02', '16:00:00'),
+(3, 2, 'Fadel', 'MasyaAllah', '1', '2018-07-04', '11:25:00'),
+(4, 2, 'Fadel', 'Subhanallah', '0', '2018-07-03', '20:30:08');
 
 -- --------------------------------------------------------
 
@@ -152,16 +155,19 @@ INSERT INTO `komentar` (`id`, `id_artikel`, `nama`, `komentar`, `tanggal`, `jam`
 CREATE TABLE `rekaman_kajian` (
   `id` int(11) NOT NULL,
   `judul` varchar(50) NOT NULL,
-  `rekaman` text NOT NULL
+  `rekaman` text NOT NULL,
+  `deskripsi` text NOT NULL,
+  `tanggal` date NOT NULL,
+  `jam` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `rekaman_kajian`
 --
 
-INSERT INTO `rekaman_kajian` (`id`, `judul`, `rekaman`) VALUES
-(6, 'asdasd', '1530361760-01_c.wav'),
-(7, 'Debat', '1530901256-Debat Islam & Kristen(03).mp3');
+INSERT INTO `rekaman_kajian` (`id`, `judul`, `rekaman`, `deskripsi`, `tanggal`, `jam`) VALUES
+(6, 'asdasd', '1530361760-01_c.wav', 'asdfasdf', '2018-07-02', '13:00:00'),
+(7, 'Debat', '1530901256-Debat Islam & Kristen(03).mp3', 'debat', '2018-07-01', '05:00:00');
 
 --
 -- Indexes for dumped tables
@@ -225,13 +231,13 @@ ALTER TABLE `artikel_kajian`
 -- AUTO_INCREMENT for table `donasi`
 --
 ALTER TABLE `donasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `jadwal_kajian`
 --
 ALTER TABLE `jadwal_kajian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `komentar`
@@ -243,7 +249,7 @@ ALTER TABLE `komentar`
 -- AUTO_INCREMENT for table `rekaman_kajian`
 --
 ALTER TABLE `rekaman_kajian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables

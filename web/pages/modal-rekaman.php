@@ -34,6 +34,12 @@
           }?>
         </div>
       </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Deskripsi</label>
+        <div class="col-sm-7">
+          <textarea type="text" name="deskripsi" class="md-textarea form-control" rows="3"><?php echo $row['deskripsi'] ?></textarea>
+        </div>
+      </div>
       <div class="position-center">
         <div class="text-center">
           <button type="submit" name="update" class="btn btn-primary">Update</button>

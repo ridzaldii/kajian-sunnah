@@ -14,7 +14,7 @@ class JsonDisplayMarker {
         $link = $connection->getLink();
         try{
             //tampilkan semua data dari mysql
-            $queryMarker = "SELECT * FROM donasi";
+            $queryMarker = "SELECT * FROM donasi order by id desc";
             $getData = $conn->prepare($queryMarker);
             $getData->execute();
             $result = $getData->fetchAll(PDO::FETCH_ASSOC);

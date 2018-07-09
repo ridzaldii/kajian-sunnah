@@ -161,6 +161,21 @@
           <input type="text" name="tempat" value="<?php echo $row['tempat'] ?>" class="form-control">
         </div>
       </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Nama Panitia</label>
+        <div class="col-sm-7">
+          <input type="text" name="panitia" value="<?php echo $row['panitia'] ?>" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Kontak</label>
+        <div class="col-sm-2">
+          <input type="text" class="form-control" value="+62" disabled>
+        </div>
+        <div class="col-sm-5">
+          <input type="text" name="kontak" class="form-control" value="<?php echo $row['kontak'] ?>">
+        </div>
+      </div>
       <div class="position-center">
         <div class="text-center">
           <button type="submit" name="update" class="btn btn-primary">Update</button>

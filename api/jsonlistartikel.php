@@ -30,6 +30,7 @@ class JsonDisplayMarker {
                             'id_artikel'=>$data1['id_artikel'],
                             'nama'=>$data1['nama'],
                             'komentar'=>$data1['komentar'],
+                            'status'=>$data1['status'],
                             'tanggal'=>$data1['tanggal'],
                             'jam'=>$data1['jam']
                             )

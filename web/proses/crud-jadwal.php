@@ -10,12 +10,14 @@
 		$jam		= $_POST['waktu'].":00";
 		$tempat 				= $_POST['tempat'];
 		$rutin 				= $_POST['rutin'];
+		$panitia			= $_POST['panitia'];
+		$kontak		= $_POST['kontak'];
 
 		$file		= time()."-".$_FILES['gambar']['name'];
 		$filetmp 		= $_FILES['gambar']['tmp_name'];
 
 		if(move_uploaded_file($filetmp, '../images/poster/'.$file)){
-			$query 		= "INSERT INTO jadwal_kajian VALUES('', '$judul', '$ustadz','$deskripsi','$tanggal','$jam','$hari','$tempat','$rutin','$file')";
+			$query 		= "INSERT INTO jadwal_kajian VALUES('', '$judul', '$ustadz','$deskripsi','$tanggal','$jam','$hari','$tempat','$rutin','$file','$panitia','$kontak')";
 
 			$result 	= $conn->query($query);
 			if ($result) {
@@ -38,12 +40,14 @@
 		$jam		= $_POST['waktu'].":00";
 		$tempat 				= $_POST['tempat'];
 		$rutin 				= $_POST['rutin'];
+		$panitia			= $_POST['panitia'];
+		$kontak		= $_POST['kontak'];
 
 		$file		= time()."-".$_FILES['gambar']['name'];
 		$filetmp 		= $_FILES['gambar']['tmp_name'];
 
 		if(move_uploaded_file($filetmp, '../images/poster/'.$file)){
-			$query 		= "INSERT INTO jadwal_kajian VALUES('', '$judul', '$ustadz','$deskripsi','','$jam','$hari','$tempat','$rutin','$file')";
+			$query 		= "INSERT INTO jadwal_kajian VALUES('', '$judul', '$ustadz','$deskripsi','','$jam','$hari','$tempat','$rutin','$file','$panitia','$kontak')";
 
 			$result 	= $conn->query($query);
 			if ($result) {
@@ -79,8 +83,10 @@
 		$hari				= $_POST['hari'];
 		$jam		= $_POST['waktu'].":00";
 		$tempat 				= $_POST['tempat'];
+		$panitia			= $_POST['panitia'];
+		$kontak		= $_POST['kontak'];
 
-		$query 		= "UPDATE jadwal_kajian SET judul='$judul',ustadz='$ustadz',deskripsi='$deskripsi',tanggal='$tanggal',hari='$hari',waktu='$jam',tempat='$tempat' WHERE id='$id' ";
+		$query 		= "UPDATE jadwal_kajian SET judul='$judul',ustadz='$ustadz',deskripsi='$deskripsi',tanggal='$tanggal',hari='$hari',waktu='$jam',tempat='$tempat',panitia='$panitia',kontak='$kontak' WHERE id='$id' ";
 
 		$result 	= $conn->query($query);
 		if ($result) {

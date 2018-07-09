@@ -62,5 +62,33 @@
 			echo $conn->error;
 			echo "error";
 		}
+	} elseif (isset($_GET['validasi'])) {
+		$id = $_GET['validasi'];
+		$kode = $_GET['kode'];
+		if ($kode=='v') {
+			$query = "UPDATE komentar SET status = '1' WHERE id='$id'";
+			$result 	= $conn->query($query);
+			if ($result) {
+				echo "<script>
+							alert('Berhasil Divalidasi');
+							window.location='".$link."/komentarartikel.php';
+							</script>";
+			}else{
+				echo $conn->error;
+				echo "error";
+			}	
+		} elseif ($kode=='u') {
+			$query = "UPDATE komentar SET status = '0' WHERE id='$id'";
+			$result 	= $conn->query($query);
+			if ($result) {
+				echo "<script>
+							alert('Validasi Dibatalkan');
+							window.location='".$link."/komentarartikel.php';
+							</script>";
+			}else{
+				echo $conn->error;
+				echo "error";
+			}	
+		}
 	}
  ?>

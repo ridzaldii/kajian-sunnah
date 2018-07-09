@@ -159,21 +159,14 @@ if (!isset($_SESSION['nama_user'])) {
                 </div>
               </div>
               <div>
-                <table id="myTable" class="table" ui-jq="footable" ui-options='{
-                  "paging": {
-                    "enabled": true
-                  },
-                  "filtering": {
-                    "enabled": true
-                  },
-                  "sorting": {
-                    "enabled": true
-                  }}'>
+                <div class="table-responsive">
+                <table id="myTable" class="table table-striped b-t b-light">
                   <thead>
                     <tr>
                       <th data-breakpoints="xs">ID</th>
                       <th>Judul Kajian</th>
                       <th>File Rekaman</th>
+                      <th>Deskripsi</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -186,7 +179,9 @@ if (!isset($_SESSION['nama_user'])) {
                      ?>
                     <tr>
                       <td><?php echo $row['id']; ?></td>
-                      <td><?php echo $row['judul'];?></td>
+                      <td>
+                        <div class="table-cell-inner"><?php echo $row['judul'];?></div>
+                      </td>
                       <td>
                         <?php 
                           if (file_exists("file/".$row['rekaman'])==1) {
@@ -201,6 +196,9 @@ if (!isset($_SESSION['nama_user'])) {
                           
                       </td>
                       <td>
+                        <div class="table-cell-inner"><?php echo $row['deskripsi']; ?></div>
+                      </td>
+                      <td>
                         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal<?php echo $row['id'] ?>">Edit</button>
                         <a onclick="return confirm('Hapus Rekaman <?php echo $row['judul']; ?>?')" href="<?php echo $link; ?>/proses/crud-rekaman.php?hapus=<?php echo $row['id'] ?>"><button type="button" class="btn btn-sm btn-danger">Hapus</button></a>
                         <!-- Modal Start -->
@@ -212,7 +210,7 @@ if (!isset($_SESSION['nama_user'])) {
                     </tr>
                     <?php } ?>
                   </tbody>
-                </table>
+                </table></div> 
               </div>
             </div>
           </div>

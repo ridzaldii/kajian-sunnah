@@ -161,16 +161,8 @@ if (!isset($_SESSION['nama_user'])) {
                 </div>
               </div>
               <div>
-                <table id="myTable" class="table" ui-jq="footable" ui-options='{
-                  "paging": {
-                    "enabled": true
-                  },
-                  "filtering": {
-                    "enabled": true
-                  },
-                  "sorting": {
-                    "enabled": true
-                  }}'>
+                <div class="table-responsive">
+                <table id="myTable" class="table table-striped b-t b-light">
                   <thead>
                     <tr>
                       <th data-breakpoints="xs">ID</th>
@@ -206,7 +198,7 @@ if (!isset($_SESSION['nama_user'])) {
                     </tr>
                     <?php } ?>
                   </tbody>
-                </table>
+                </table></div> 
               </div>
             </div>
           </div>

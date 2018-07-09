@@ -976,6 +976,18 @@ div#graph1,div#graph4,div#graph5,div#graph6,div#graph7,div#graph8,div#graph9 {
     font-size: 0.9em;
     color: #555;
 }
+table {
+    table-layout: auto;
+}
+table td {
+    overflow: hidden;
+}
+.table-cell-inner {
+  height: 50px;
+  max-height: 50px;
+  max-width: 200px;
+  overflow: visible;
+}
 .table>thead>tr>th {
     border-bottom: 1px solid #e1ab91 ! important;
 }

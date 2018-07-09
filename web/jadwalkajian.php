@@ -166,28 +166,22 @@ if (!isset($_SESSION['nama_user'])) {
                 </div>
               </div>
               <div>
-                <table class="table" id="myTable" ui-jq="footable" ui-options='{
-                  "paging": {
-                    "enabled": true
-                  },
-                  "filtering": {
-                    "enabled": true
-                  },
-                  "sorting": {
-                    "enabled": true
-                  }}'>
+                <div class="table-responsive">
+                <table class="table table-striped b-t b-light" id="myTable" >
                   <thead>
                     <tr>
                       <th data-breakpoints="xs">ID</th>
                       <th>Judul</th>
                       <th>Ustadz</th>
-                      <th data-breakpoints="xs">Deksripsi</th>
+                      <th >Deksripsi</th>
                      
                       <th >Tanggal</th>
                       <th >Hari</th>
                       <th >Waktu</th>
                       <th >Lokasi</th>
                       <th >Rutin</th>
+                      <th >Panitia</th>
+                      <th >Kontak</th>
                       <th >Action</th>
                     </tr>
                   </thead>
@@ -200,14 +194,20 @@ if (!isset($_SESSION['nama_user'])) {
                      ?>
                     <tr>
                       <td><?php echo $row['id']; ?></td>
-                      <td><?php echo $row['judul']; ?></td>
+                      <td>
+                        <div class="table-cell-inner"><?php echo $row['judul']; ?></div>
+                      </td>
                       <td><?php echo $row['ustadz']; ?></td>
-                      <td><?php echo $row['deskripsi']; ?></td>
+                      <td>
+                        <div class="table-cell-inner"><?php echo $row['deskripsi']; ?></div>
+                      </td>
                       <td><?php echo $row['tanggal']; ?></td>
                       <td><?php echo $row['hari']; ?></td>
                       <td><?php echo $row['waktu']; ?></td>
                       <td><?php echo $row['tempat']; ?></td>
                       <td><?php echo $row['rutin']; ?></td>
+                      <td><?php echo $row['panitia']; ?></td>
+                      <td>+62<?php echo $row['kontak']; ?></td>
                       <td>
                         <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#myModal1<?php echo $row['id'] ?>">Lihat Poster</button>
                         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal<?php echo $row['id'] ?>">Edit</button>
@@ -225,6 +225,7 @@ if (!isset($_SESSION['nama_user'])) {
                     <?php } ?>
                   </tbody>
                 </table>
+              </div>
               </div>
             </div>
           </div>

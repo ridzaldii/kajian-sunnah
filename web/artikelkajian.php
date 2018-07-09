@@ -163,16 +163,8 @@ if (!isset($_SESSION['nama_user'])) {
                 </div>
               </div>
               <div>
-                <table id="myTable" class="table" ui-jq="footable" ui-options='{
-                  "paging": {
-                    "enabled": true
-                  },
-                  "filtering": {
-                    "enabled": true
-                  },
-                  "sorting": {
-                    "enabled": true
-                  }}'>
+                <div class="table-responsive">
+                <table id="myTable" class="table table-striped b-t b-light" >
                   <thead>
                     <tr>
                       <th data-breakpoints="xs">ID</th>
@@ -193,9 +185,13 @@ if (!isset($_SESSION['nama_user'])) {
                      ?>
                     <tr>
                       <td><?php echo $row['id']; ?></td>
-                      <td><?php echo $row['judul']; ?></td>
+                      <td>
+                        <div class="table-cell-inner"><?php echo $row['judul']; ?></div> 
+                      </td>
                       <td><?php echo $row['pembicara']; ?></td>
-                      <td data-breakpoints="xs"><?php echo $row['deskripsi']; ?></td>
+                      <td data-breakpoints="xs">
+                        <div class="table-cell-inner"><?php echo $row['deskripsi']; ?></div>
+                      </td>
                       <td><?php echo $row['kategori']; ?></td>
                       <td><?php echo $row['tanggal'].", ".$row['jam']; ?></td>
                       <td>
@@ -210,7 +206,7 @@ if (!isset($_SESSION['nama_user'])) {
                     </tr>
                     <?php } ?>
                   </tbody>
-                </table>
+                </table></div> 
               </div>
             </div>
           </div>
