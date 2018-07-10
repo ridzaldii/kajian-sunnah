@@ -1,11 +1,16 @@
 <?php 
 	include "../connect.php";
-
+	include '../pusher-beams/src/PushNotifications.php';
+	require '../pusher-beams/vendor/autoload.php';
 	if (isset($_POST['submit'])) {
 		$judul 				= $_POST['judul'];
 		$pembicara		= $_POST['pembicara'];
 		$deskripsi			= $_POST['deskripsi'];
 		$kategori			= $_POST['kategori'];
+		$pushNotifications = new \Pusher\PushNotifications\PushNotifications(array(
+		  "instanceId" => "52da5a29-f929-4686-ab85-8829dc8ea266",
+		  "secretKey" => "AA45726F7796AA3065F8A11BFF715BA",
+		));
 
 		$query 		= "INSERT INTO artikel_kajian VALUES('', '$judul', '$pembicara','$deskripsi','$kategori',now(),now())";
 
@@ -15,6 +20,15 @@
 						alert('Berhasil');
 						window.location='".$link."/artikelkajian.php';
 						</script>";
+			$publishResponse = $pushNotifications->publish(
+			  array("hello"),
+			  array(
+			    "fcm" => array(
+			      "notification" => array(
+			        "title" => "Hi!",
+			        "body" => "Ada Artikel Kajian Baru!"
+			    ))
+			));
 		}else{
 			echo $conn->error;
 			echo "error";

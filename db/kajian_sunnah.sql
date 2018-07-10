@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 09, 2018 at 02:19 PM
+-- Generation Time: Jul 10, 2018 at 06:04 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -123,6 +123,31 @@ INSERT INTO `jadwal_kajian` (`id`, `judul`, `ustadz`, `deskripsi`, `tanggal`, `w
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `jadwal_rutin`
+--
+
+CREATE TABLE `jadwal_rutin` (
+  `id` int(11) NOT NULL,
+  `id_jadwal` int(11) NOT NULL,
+  `Senin` enum('Ya','Tidak') NOT NULL DEFAULT 'Tidak',
+  `Selasa` enum('Ya','Tidak') NOT NULL DEFAULT 'Tidak',
+  `Rabu` enum('Ya','Tidak') NOT NULL DEFAULT 'Tidak',
+  `Kamis` enum('Ya','Tidak') NOT NULL DEFAULT 'Tidak',
+  `Jumat` enum('Ya','Tidak') NOT NULL DEFAULT 'Tidak',
+  `Sabtu` enum('Ya','Tidak') NOT NULL DEFAULT 'Tidak',
+  `Minggu` enum('Ya','Tidak') NOT NULL DEFAULT 'Tidak'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jadwal_rutin`
+--
+
+INSERT INTO `jadwal_rutin` (`id`, `id_jadwal`, `Senin`, `Selasa`, `Rabu`, `Kamis`, `Jumat`, `Sabtu`, `Minggu`) VALUES
+(1, 1, 'Ya', 'Ya', 'Tidak', 'Tidak', 'Ya', 'Tidak', 'Tidak');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `komentar`
 --
 
@@ -199,6 +224,13 @@ ALTER TABLE `jadwal_kajian`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `jadwal_rutin`
+--
+ALTER TABLE `jadwal_rutin`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_id_jadwal` (`id_jadwal`);
+
+--
 -- Indexes for table `komentar`
 --
 ALTER TABLE `komentar`
@@ -240,6 +272,12 @@ ALTER TABLE `jadwal_kajian`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `jadwal_rutin`
+--
+ALTER TABLE `jadwal_rutin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `komentar`
 --
 ALTER TABLE `komentar`
@@ -249,11 +287,17 @@ ALTER TABLE `komentar`
 -- AUTO_INCREMENT for table `rekaman_kajian`
 --
 ALTER TABLE `rekaman_kajian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `jadwal_rutin`
+--
+ALTER TABLE `jadwal_rutin`
+  ADD CONSTRAINT `jadwal_rutin_ibfk_1` FOREIGN KEY (`id_jadwal`) REFERENCES `jadwal_kajian` (`id`);
 
 --
 -- Constraints for table `komentar`
