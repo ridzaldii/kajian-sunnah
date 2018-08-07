@@ -1,5 +1,8 @@
 <?php 
 	include "../connect.php";
+	require 'pushNotif.php';
+
+	$pushNotif = new pushNotif();
 
 	if (isset($_POST['submit'])) {
 		$judul = $_POST['judul'];
@@ -17,6 +20,7 @@
 							alert('Berhasil');
 							window.location='".$link."/rekamankajian.php';
 							</script>";
+					$SendNotif = $pushNotif->push("Ada Rekaman Kajian Baru! ", $judul);
 			}else{
 				echo $conn->error;
 				echo "error";

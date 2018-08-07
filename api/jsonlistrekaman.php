@@ -23,7 +23,7 @@ class JsonDisplayMarker {
                     array(
                         'id'=>$data['id'],
                         'judul'=>$data['judul'],
-                        'rekaman'=>$link.'file/'.$data['rekaman'],
+                        'rekaman'=>$link.'file/'.str_replace(" ", "%20", $data['rekaman']),
                         'deskripsi'=>$data['deskripsi'],
                         'tanggal'=>$data['tanggal'],
                         'jam'=>$data['jam'])

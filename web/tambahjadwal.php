@@ -155,7 +155,7 @@ if (!isset($_SESSION['nama_user'])) {
                     <div class="form-group">
                       <label class="col-sm-3 control-label">Judul</label>
                       <div class="col-sm-6">
-                        <input type="text" name="judul" class="form-control">
+                        <input type="text" name="judul" class="form-control" maxlength="85">
                       </div>
                     </div>
                     <div class="form-group">
@@ -182,15 +182,27 @@ if (!isset($_SESSION['nama_user'])) {
                     <div class="form-group" id="inHari">
                         <label class="col-sm-3 control-label col-lg-3" for="inputSuccess">Hari</label>
                         <div class="col-lg-6">
-                          <select name="shari" class="form-control">
-                            <option value="Senin">Senin</option>
-                            <option value="Selasa">Selasa</option>
-                            <option value="Rabu">Rabu</option>
-                            <option value="Kamis">Kamis</option>
-                            <option value="Jumat">Jumat</option>
-                            <option value="Sabtu">Sabtu</option>
-                            <option value="Minggu">Minggu</option>
-                          </select>
+                          <label class="checkbox-inline">
+                            <input type="checkbox" name="shari[]" id="shari" value="Senin">Senin
+                          </label>
+                          <label class="checkbox-inline">
+                            <input type="checkbox" name="shari[]" id="shari" value="Selasa">Selasa
+                          </label>
+                          <label class="checkbox-inline">
+                            <input type="checkbox" name="shari[]" id="shari" value="Rabu">Rabu
+                          </label>
+                          <label class="checkbox-inline">
+                            <input type="checkbox" name="shari[]" id="shari" value="Kamis">Kamis
+                          </label>
+                          <label class="checkbox-inline">
+                            <input type="checkbox" name="shari[]" id="shari" value="Jumat">Jumat
+                          </label>
+                          <label class="checkbox-inline">
+                            <input type="checkbox" name="shari[]" id="shari" value="Sabtu">Sabtu
+                          </label>
+                          <label class="checkbox-inline">
+                            <input type="checkbox" name="shari[]" id="shari" value="Minggu">Minggu
+                          </label>
                         </div>
                     </div>
                     <div class="form-group" id="inTgl" style="display:none;">

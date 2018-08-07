@@ -202,7 +202,19 @@ if (!isset($_SESSION['nama_user'])) {
                         <div class="table-cell-inner"><?php echo $row['deskripsi']; ?></div>
                       </td>
                       <td><?php echo $row['tanggal']; ?></td>
-                      <td><?php echo $row['hari']; ?></td>
+                      <td><?php
+                            $query1 = "SELECT * FROM hari WHERE id_jadwal = ".$row['id'];
+                            $result1 = $conn->query($query1);
+                            while ($row1 = $result1->fetch_assoc()) {
+                              echo ($row1['Senin'] == 'Ya' ? 'Senin<br>' : '')
+                              .($row1['Selasa'] == 'Ya' ? 'Selasa<br>' : '')
+                              .($row1['Rabu'] == 'Ya' ? 'Rabu<br>' : '')
+                              .($row1['Kamis'] == 'Ya' ? 'Kamis<br>' : '')
+                              .($row1['Jumat'] == 'Ya' ? 'Jumat<br>' : '')
+                              .($row1['Sabtu'] == 'Ya' ? 'Sabtu<br>' : '')
+                              .($row1['Minggu'] == 'Ya' ? 'Minggu' : '');
+                            }
+                      ?></td>
                       <td><?php echo $row['waktu']; ?></td>
                       <td><?php echo $row['tempat']; ?></td>
                       <td><?php echo $row['rutin']; ?></td>

@@ -1,5 +1,8 @@
 <?php 
 	include "../connect.php";
+	require 'pushNotif.php';
+
+	$pushNotif = new pushNotif();
 
 	if (isset($_POST['submit'])) {
 		$kontak = $_POST['kontak'];
@@ -18,6 +21,7 @@
 							alert('Berhasil');
 							window.location='".$link."/infodonasi.php';
 							</script>";
+					$SendNotif = $pushNotif->push("Ada Poster Donasi Baru!", "");
 			}else{
 				echo $conn->error;
 				echo "error";

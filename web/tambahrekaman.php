@@ -152,7 +152,7 @@ if (!isset($_SESSION['nama_user'])) {
                   <form role="form" class="form-horizontal bucket-form" action="proses/crud-rekaman.php" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="judul">Judul Kajian</label>
-                        <input type="text" id="judul" name="judul" class="form-control" required>
+                        <input type="text" id="judul" name="judul" class="form-control" maxlength="85" required>
                     </div>
                     <div class="form-group">
                         <label for="filerekaman">Input File Rekaman</label>

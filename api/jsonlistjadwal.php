@@ -19,40 +19,23 @@ class JsonDisplayMarker {
             $getData->execute();
             $result = $getData->fetchAll(PDO::FETCH_ASSOC);
             foreach($result as $data){
-                if ($data['rutin']=='Ya') {
-                    $response1 = array();
-                    $queryMarker1 = "SELECT * FROM jadwal_rutin WHERE id_jadwal=".$data['id'];
-                    $getData1 = $conn->prepare($queryMarker1);
-                    $getData1->execute();
-                    $result1 = $getData1->fetchAll(PDO::FETCH_ASSOC);
-                    foreach($result1 as $data1){
-                        array_push($response1, 
-                            array(
-                                'Senin'=>$data1['Senin'],
-                                'Selasa'=>$data1['Selasa'],
-                                'Rabu'=>$data1['Rabu'],
-                                'Kamis'=>$data1['Kamis'],
-                                'Jumat'=>$data1['Jumat'],
-                                'Sabtu'=>$data1['Sabtu'],
-                                'Minggu'=>$data1['Minggu']
-                                )
-                            );
-                    }
-                } else {
-                    $response1 = array();
-                    foreach($result1 as $data1){
-                        array_push($response1, 
-                            array(
-                                'Senin'=>($data['hari']=='Senin' ? 'Ya' : 'Tidak'),
-                                'Selasa'=>($data['hari']=='Selasa' ? 'Ya' : 'Tidak'),
-                                'Rabu'=>($data['hari']=='Rabu' ? 'Ya' : 'Tidak'),
-                                'Kamis'=>($data['hari']=='Kamis' ? 'Ya' : 'Tidak'),
-                                'Jumat'=>($data['hari']=='Jumat' ? 'Ya' : 'Tidak'),
-                                'Sabtu'=>($data['hari']=='Sabtu' ? 'Ya' : 'Tidak'),
-                                'Minggu'=>($data['hari']=='Minggu' ? 'Ya' : 'Tidak')
-                                )
-                            );
-                    }
+                $response1 = array();
+                $queryMarker1 = "SELECT * FROM hari WHERE id_jadwal=".$data['id'];
+                $getData1 = $conn->prepare($queryMarker1);
+                $getData1->execute();
+                $result1 = $getData1->fetchAll(PDO::FETCH_ASSOC);
+                foreach($result1 as $data1){
+                    array_push($response1, 
+                        array(
+                            'Senin'=>$data1['Senin'],
+                            'Selasa'=>$data1['Selasa'],
+                            'Rabu'=>$data1['Rabu'],
+                            'Kamis'=>$data1['Kamis'],
+                            'Jumat'=>$data1['Jumat'],
+                            'Sabtu'=>$data1['Sabtu'],
+                            'Minggu'=>$data1['Minggu']
+                            )
+                        );
                 }
                 array_push($response,
                     array(

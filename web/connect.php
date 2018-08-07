@@ -6,6 +6,7 @@
 
 	$conn = new mysqli($host, $user, $pass, $db);
 
-	$link = "http://localhost/kajian-sunnah/web";
-	$linkproses = "http://localhost/kajian-sunnah/web/proses";
+	$ip = "172.20.100.14";
+	$link = "http://".$ip."/kajian-sunnah/web";
+	$linkproses = "http://".$ip."/kajian-sunnah/web/proses";
  ?>

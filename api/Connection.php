@@ -2,7 +2,7 @@
 
 class Connection {
     function getLink(){
-        $ip = "172.20.100.14";
+        $ip = "localhost";
         $link = "http://".$ip."/kajian-sunnah/web/";        
         return $link;
     }

@@ -152,7 +152,7 @@ if (!isset($_SESSION['nama_user'])) {
                     <div class="form-group">
                       <label class="col-sm-3 control-label">Judul</label>
                       <div class="col-sm-6">
-                        <input type="text" name="judul" class="form-control">
+                        <input type="text" name="judul" class="form-control" maxlength="85">
                       </div>
                     </div>
                     <div class="form-group">

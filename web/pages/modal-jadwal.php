@@ -55,12 +55,34 @@
       } ?>
         <label class="col-sm-3 control-label">Tanggal</label>
         <div class="col-sm-4">
-          <input id="date_picker" type="date" class="form-control" value="<?php echo $row['tanggal'] ?>">
-          <input type="text" id="tanggal" name="tanggal" value="<?php echo $row['tanggal'] ?>" hidden>
+          <input id="date_picker<?php echo $row['id'];?>" type="date" class="form-control" value="<?php echo $row['tanggal'] ?>">
+          <input type="text" id="tanggal<?php echo $row['id'];?>" name="tanggal" value="<?php echo $row['tanggal'] ?>" hidden>
         </div>
         <label class="col-sm-1 control-label">Hari</label>
         <div class="col-sm-2">
-          <input type="text" id="hari" name="hari" class="form-control" value="<?php echo $row['hari'] ?>" readonly>
+          <?php 
+            $query1 = "SELECT * FROM hari WHERE id_jadwal = ".$row['id'];
+              $result1 = $conn->query($query1);
+              ?>
+              <input type="text" id="hari<?php echo $row['id'];?>" name="hari" class="form-control" value="<?php 
+                while ($row1 = $result1->fetch_assoc()) {
+                  if ($row1['Senin']=='Ya') {
+                    echo 'Senin';
+                  } elseif ($row1['Selasa']=='Ya') {
+                    echo 'Selasa';
+                  } elseif ($row1['Rabu']=='Ya') {
+                    echo 'Rabu';
+                  } elseif ($row1['Kamis']=='Ya') {
+                    echo 'Kamis';
+                  } elseif ($row1['Jumat']=='Ya') {
+                    echo 'Jumat';
+                  } elseif ($row1['Sabtu']=='Ya') {
+                    echo 'Sabtu';
+                  } elseif ($row1['Minggu']=='Ya') {
+                    echo 'Minggu';
+                  } 
+                }
+              ?>" readonly>
         </div>
       </div>
       <?php if ($row['rutin']=='Ya') {
@@ -74,79 +96,102 @@
       } ?>
         <label class="col-sm-3 control-label">Hari</label>
         <div class="col-lg-6">
-          <select name="hari" class="form-control">
-            <?php if ($row['hari']=='Senin') {
-              ?>
-              <option value="Senin" selected>Senin</option>
-              <option value="Selasa">Selasa</option>
-              <option value="Rabu">Rabu</option>
-              <option value="Kamis">Kamis</option>
-              <option value="Jumat">Jumat</option>
-              <option value="Sabtu">Sabtu</option>
-              <option value="Minggu">Minggu</option>
-              <?php
-            } elseif ($row['hari']=='Selasa') {
-              ?>
-              <option value="Senin">Senin</option>
-              <option value="Selasa" selected>Selasa</option>
-              <option value="Rabu">Rabu</option>
-              <option value="Kamis">Kamis</option>
-              <option value="Jumat">Jumat</option>
-              <option value="Sabtu">Sabtu</option>
-              <option value="Minggu">Minggu</option>
-              <?php
-            } elseif ($row['hari']=='Rabu') {
-              ?>
-              <option value="Senin">Senin</option>
-              <option value="Selasa">Selasa</option>
-              <option value="Rabu" selected>Rabu</option>
-              <option value="Kamis">Kamis</option>
-              <option value="Jumat">Jumat</option>
-              <option value="Sabtu">Sabtu</option>
-              <option value="Minggu">Minggu</option>
-              <?php
-            } elseif ($row['hari']=='Kamis') {
-              ?>
-              <option value="Senin">Senin</option>
-              <option value="Selasa">Selasa</option>
-              <option value="Rabu">Rabu</option>
-              <option value="Kamis" selected>Kamis</option>
-              <option value="Jumat">Jumat</option>
-              <option value="Sabtu">Sabtu</option>
-              <option value="Minggu">Minggu</option>
-              <?php
-            } elseif ($row['hari']=='Jumat') {
-              ?>
-              <option value="Senin">Senin</option>
-              <option value="Selasa">Selasa</option>
-              <option value="Rabu">Rabu</option>
-              <option value="Kamis">Kamis</option>
-              <option value="Jumat" selected>Jumat</option>
-              <option value="Sabtu">Sabtu</option>
-              <option value="Minggu">Minggu</option>
-              <?php
-            } elseif ($row['hari']=='Sabtu') {
-              ?>
-              <option value="Senin">Senin</option>
-              <option value="Selasa">Selasa</option>
-              <option value="Rabu">Rabu</option>
-              <option value="Kamis">Kamis</option>
-              <option value="Jumat">Jumat</option>
-              <option value="Sabtu" selected>Sabtu</option>
-              <option value="Minggu">Minggu</option>
-              <?php
-            } elseif ($row['hari']=='Minggu') {
-              ?>
-              <option value="Senin">Senin</option>
-              <option value="Selasa">Selasa</option>
-              <option value="Rabu">Rabu</option>
-              <option value="Kamis">Kamis</option>
-              <option value="Jumat">Jumat</option>
-              <option value="Sabtu">Sabtu</option>
-              <option value="Minggu" selected>Minggu</option>
-              <?php
-            } ?>
-          </select>
+            <?php 
+              $query1 = "SELECT * FROM hari WHERE id_jadwal = ".$row['id'];
+              $result1 = $conn->query($query1);
+              while ($row1 = $result1->fetch_assoc()) {
+                if ($row1['Senin']=='Ya') {
+                  ?>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="shari[]" id="shari" value="Senin" checked>Senin
+                  </label>
+                  <?php
+                } else {
+                  ?>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="shari[]" id="shari" value="Senin">Senin
+                  </label>
+                  <?php
+                } 
+                if ($row1['Selasa']=='Ya') {
+                  ?>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="shari[]" id="shari" value="Selasa" checked>Selasa
+                  </label>
+                  <?php
+                } else {
+                  ?>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="shari[]" id="shari" value="Selasa">Selasa
+                  </label>
+                  <?php
+                }
+                if ($row1['Rabu']=='Ya') {
+                  ?>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="shari[]" id="shari" value="Rabu" checked>Rabu
+                  </label>
+                  <?php
+                } else {
+                  ?>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="shari[]" id="shari" value="Rabu">Rabu
+                  </label>
+                  <?php
+                }
+                if ($row1['Kamis']=='Ya') {
+                  ?>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="shari[]" id="shari" value="Kamis" checked>Kamis
+                  </label>
+                  <?php
+                } else {
+                  ?>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="shari[]" id="shari" value="Kamis">Kamis
+                  </label>
+                  <?php
+                }
+                if ($row1['Jumat']=='Ya') {
+                  ?>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="shari[]" id="shari" value="Jumat" checked>Jumat
+                  </label>
+                  <?php
+                } else {
+                  ?>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="shari[]" id="shari" value="Jumat">Jumat
+                  </label>
+                  <?php
+                }
+                if ($row1['Sabtu']=='Ya') {
+                  ?>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="shari[]" id="shari" value="Sabtu" checked>Sabtu
+                  </label>
+                  <?php
+                } else {
+                  ?>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="shari[]" id="shari" value="Sabtu">Sabtu
+                  </label>
+                  <?php
+                }
+                if ($row1['Minggu']=='Ya') {
+                  ?>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="shari[]" id="shari" value="Minggu" checked>Minggu
+                  </label>
+                  <?php
+                } else {
+                  ?>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="shari[]" id="shari" value="Minggu">Minggu
+                  </label>
+                  <?php
+                }
+              } ?>
         </div>
       </div>
       <div class="form-group">
@@ -178,7 +223,15 @@
       </div>
       <div class="position-center">
         <div class="text-center">
-          <button type="submit" name="update" class="btn btn-primary">Update</button>
+          <?php if ($row['rutin']=='Ya') {
+            ?>
+            <button type="submit" id="submit" name="update1" class="btn btn-primary">Update</button>
+            <?php
+          } elseif ($row['rutin']=='Tidak') {
+            ?>
+            <button type="submit" id="submit" name="update" class="btn btn-primary">Update</button>
+            <?php
+          } ?>
         </div>
       </div>
       </form>
@@ -192,12 +245,12 @@
 
 <!-- timepicker -->
 <script type="text/javascript">
-document.getElementById("date_picker").addEventListener("input", myFunction);
+document.getElementById("date_picker<?php echo $row['id'];?>").addEventListener("input", myFunction);
 
   function myFunction() {
-    var j = document.getElementById("tanggal");
-    var f = document.getElementById("date_picker");
-    var d = document.getElementById("hari");
+    var j = document.getElementById("tanggal<?php echo $row['id'];?>");
+    var f = document.getElementById("date_picker<?php echo $row['id'];?>");
+    var d = document.getElementById("hari<?php echo $row['id'];?>");
 
     var date = new Date(f.value);
     var bulan = "";

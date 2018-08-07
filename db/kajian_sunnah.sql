@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 10, 2018 at 06:04 PM
+-- Generation Time: Jul 10, 2018 at 07:06 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -93,40 +93,10 @@ INSERT INTO `donasi` (`id`, `gambar`, `kontak`, `wa`, `telfon`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jadwal_kajian`
+-- Table structure for table `hari`
 --
 
-CREATE TABLE `jadwal_kajian` (
-  `id` int(11) NOT NULL,
-  `judul` varchar(250) NOT NULL,
-  `ustadz` varchar(250) NOT NULL,
-  `deskripsi` text NOT NULL,
-  `tanggal` date NOT NULL,
-  `waktu` time DEFAULT NULL,
-  `hari` enum('Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu') NOT NULL,
-  `tempat` varchar(500) NOT NULL,
-  `rutin` enum('Ya','Tidak') NOT NULL,
-  `gambar` text,
-  `panitia` varchar(50) NOT NULL,
-  `kontak` varchar(13) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `jadwal_kajian`
---
-
-INSERT INTO `jadwal_kajian` (`id`, `judul`, `ustadz`, `deskripsi`, `tanggal`, `waktu`, `hari`, `tempat`, `rutin`, `gambar`, `panitia`, `kontak`) VALUES
-(1, 'Syarat sah salat', 'Yusuf Mansyur', '\"(Syarat dalam bab shalat ialah) hal-hal yang menjadi penentu keabsahan shalat, namun bukan bagian dari shalat. Berbeda dengan rukun yang merupakan bagian shalat.\"', '2018-07-31', '15:00:00', 'Selasa', 'Masjid baiturahman', 'Ya', NULL, 'AAA', '82291760763'),
-(2, 'Ceramah ramadhan 2', 'yusuf', 'ceramah ramadhan 2', '2018-06-28', '13:00:00', 'Kamis', 'Masjid nurul hijrah', 'Tidak', NULL, '', ''),
-(3, 'Bersatu diatas Jalannya Rasul dan Para Sahabat', 'Abdurrahman Thoyyib, Lc', 'Tabligh Akbar Terbuka untuk umum', '2018-07-27', '07:25:00', 'Jumat', 'Masjid Al-Firdaus', 'Tidak', '1530881237-TABLIGH-AKBAR-730x1024.jpg', '', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `jadwal_rutin`
---
-
-CREATE TABLE `jadwal_rutin` (
+CREATE TABLE `hari` (
   `id` int(11) NOT NULL,
   `id_jadwal` int(11) NOT NULL,
   `Senin` enum('Ya','Tidak') NOT NULL DEFAULT 'Tidak',
@@ -139,11 +109,42 @@ CREATE TABLE `jadwal_rutin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `jadwal_rutin`
+-- Dumping data for table `hari`
 --
 
-INSERT INTO `jadwal_rutin` (`id`, `id_jadwal`, `Senin`, `Selasa`, `Rabu`, `Kamis`, `Jumat`, `Sabtu`, `Minggu`) VALUES
-(1, 1, 'Ya', 'Ya', 'Tidak', 'Tidak', 'Ya', 'Tidak', 'Tidak');
+INSERT INTO `hari` (`id`, `id_jadwal`, `Senin`, `Selasa`, `Rabu`, `Kamis`, `Jumat`, `Sabtu`, `Minggu`) VALUES
+(1, 1, 'Ya', 'Ya', 'Tidak', 'Tidak', 'Ya', 'Tidak', 'Tidak'),
+(2, 2, 'Tidak', 'Tidak', 'Tidak', 'Ya', 'Tidak', 'Tidak', 'Tidak'),
+(3, 3, 'Tidak', 'Tidak', 'Tidak', 'Tidak', 'Ya', 'Tidak', 'Tidak');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jadwal_kajian`
+--
+
+CREATE TABLE `jadwal_kajian` (
+  `id` int(11) NOT NULL,
+  `judul` varchar(250) NOT NULL,
+  `ustadz` varchar(250) NOT NULL,
+  `deskripsi` text NOT NULL,
+  `tanggal` date NOT NULL,
+  `waktu` time DEFAULT NULL,
+  `tempat` varchar(500) NOT NULL,
+  `rutin` enum('Ya','Tidak') NOT NULL,
+  `gambar` text,
+  `panitia` varchar(50) NOT NULL,
+  `kontak` varchar(13) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jadwal_kajian`
+--
+
+INSERT INTO `jadwal_kajian` (`id`, `judul`, `ustadz`, `deskripsi`, `tanggal`, `waktu`, `tempat`, `rutin`, `gambar`, `panitia`, `kontak`) VALUES
+(1, 'Syarat sah salat', 'Yusuf Mansyur', '\"(Syarat dalam bab shalat ialah) hal-hal yang menjadi penentu keabsahan shalat, namun bukan bagian dari shalat. Berbeda dengan rukun yang merupakan bagian shalat.\"', '2018-07-31', '15:00:00', 'Masjid baiturahman', 'Ya', NULL, 'AAA', '82291760763'),
+(2, 'Ceramah ramadhan 2', 'yusuf', 'ceramah ramadhan 2', '2018-06-28', '13:00:00', 'Masjid nurul hijrah', 'Tidak', NULL, '', ''),
+(3, 'Bersatu diatas Jalannya Rasul dan Para Sahabat', 'Abdurrahman Thoyyib, Lc', 'Tabligh Akbar Terbuka untuk umum', '2018-07-27', '07:25:00', 'Masjid Al-Firdaus', 'Tidak', '1530881237-TABLIGH-AKBAR-730x1024.jpg', '', '');
 
 -- --------------------------------------------------------
 
@@ -218,17 +219,17 @@ ALTER TABLE `donasi`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `hari`
+--
+ALTER TABLE `hari`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_id_jadwal` (`id_jadwal`);
+
+--
 -- Indexes for table `jadwal_kajian`
 --
 ALTER TABLE `jadwal_kajian`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `jadwal_rutin`
---
-ALTER TABLE `jadwal_rutin`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_id_jadwal` (`id_jadwal`);
 
 --
 -- Indexes for table `komentar`
@@ -266,16 +267,16 @@ ALTER TABLE `donasi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `hari`
+--
+ALTER TABLE `hari`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `jadwal_kajian`
 --
 ALTER TABLE `jadwal_kajian`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `jadwal_rutin`
---
-ALTER TABLE `jadwal_rutin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `komentar`
@@ -294,10 +295,10 @@ ALTER TABLE `rekaman_kajian`
 --
 
 --
--- Constraints for table `jadwal_rutin`
+-- Constraints for table `hari`
 --
-ALTER TABLE `jadwal_rutin`
-  ADD CONSTRAINT `jadwal_rutin_ibfk_1` FOREIGN KEY (`id_jadwal`) REFERENCES `jadwal_kajian` (`id`);
+ALTER TABLE `hari`
+  ADD CONSTRAINT `hari_ibfk_1` FOREIGN KEY (`id_jadwal`) REFERENCES `jadwal_kajian` (`id`);
 
 --
 -- Constraints for table `komentar`
