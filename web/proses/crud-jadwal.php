@@ -5,16 +5,16 @@
 	$pushNotif = new pushNotif();
 
 	if (isset($_POST['submit'])) {
-		$judul 				= $_POST['judul'];
-		$ustadz		= $_POST['ustadz'];
-		$deskripsi			= $_POST['deskripsi'];
-		$tanggal		= $_POST['tanggal'];
+		$judul 				= addslashes($_POST['judul']);
+		$ustadz				= addslashes($_POST['ustadz']);
+		$deskripsi			= addslashes($_POST['deskripsi']);
+		$tanggal			= $_POST['tanggal'];
 		$hari				= $_POST['hari'];
-		$jam		= $_POST['waktu'].":00";
-		$tempat 				= $_POST['tempat'];
+		$jam				= $_POST['waktu'].":00";
+		$tempat 			= addslashes($_POST['tempat']);
 		$rutin 				= $_POST['rutin'];
-		$panitia			= $_POST['panitia'];
-		$kontak		= $_POST['kontak'];
+		$panitia			= addslashes($_POST['panitia']);
+		$kontak				= $_POST['kontak'];
 
 		$file		= time()."-".$_FILES['gambar']['name'];
 		$filetmp 		= $_FILES['gambar']['tmp_name'];
@@ -51,16 +51,16 @@
 			echo "Failed to upload file.";
 		}
 	} elseif (isset($_POST['submit1'])) {
-		$judul 				= $_POST['judul'];
-		$ustadz		= $_POST['ustadz'];
-		$deskripsi			= $_POST['deskripsi'];
-		$hari				= $_POST['shari'];
-		$jam		= $_POST['waktu'].":00";
-		$tempat 				= $_POST['tempat'];
+		$judul 				= addslashes($_POST['judul']);
+		$ustadz				= addslashes($_POST['ustadz']);
+		$deskripsi			= addslashes($_POST['deskripsi']);
+		$hari				= $_POST['hari'];
+		$jam				= $_POST['waktu'].":00";
+		$tempat 			= addslashes($_POST['tempat']);
 		$rutin 				= $_POST['rutin'];
-		$panitia			= $_POST['panitia'];
-		$kontak		= $_POST['kontak'];
-
+		$panitia			= addslashes($_POST['panitia']);
+		$kontak				= $_POST['kontak'];
+		
 		$file		= time()."-".$_FILES['gambar']['name'];
 		$filetmp 		= $_FILES['gambar']['tmp_name'];
 
@@ -116,26 +116,31 @@
 		}
 	} elseif (isset($_GET['hapus'])) {
 		$query = "DELETE FROM jadwal_kajian WHERE id='".$_GET['hapus']."'";
+		$set0		= "SET FOREIGN_KEY_CHECKS=0";
+		$set1		= "SET FOREIGN_KEY_CHECKS=1";
+
+		$conn->query($set0);
 		$result 	= $conn->query($query);
 		if ($result) {
 			echo "<script>
 						alert('Berhasil dihapus');
 						window.location='".$link."/jadwalkajian.php';
 						</script>";
+		$conn->query($set1);
 		}else{
 			echo $conn->error;
+			$conn->query($se1);
 			echo "error";
 		}
 	} elseif (isset($_POST['update'])) {
-		$id 	= $_POST['id'];
-		$judul 				= $_POST['judul'];
-		$ustadz		= $_POST['ustadz'];
-		$deskripsi			= $_POST['deskripsi'];
+		$judul 				= addslashes($_POST['judul']);
+		$ustadz				= addslashes($_POST['ustadz']);
+		$deskripsi			= addslashes($_POST['deskripsi']);
 		$tanggal		= $_POST['tanggal'];
 		$hari				= $_POST['hari'];
 		$jam		= $_POST['waktu'].":00";
-		$tempat 				= $_POST['tempat'];
-		$panitia			= $_POST['panitia'];
+		$tempat 			= addslashes($_POST['tempat']);
+		$panitia			= addslashes($_POST['panitia']);
 		$kontak		= $_POST['kontak'];
 
 		$query 		= "UPDATE jadwal_kajian SET judul='$judul',ustadz='$ustadz',deskripsi='$deskripsi',tanggal='$tanggal',waktu='$jam',tempat='$tempat',panitia='$panitia',kontak='$kontak' WHERE id='$id' ";

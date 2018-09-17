@@ -5,10 +5,10 @@
 	$pushNotif = new pushNotif();
 
 	if (isset($_POST['submit'])) {
-		$judul 				= $_POST['judul'];
-		$pembicara		= $_POST['pembicara'];
-		$deskripsi			= $_POST['deskripsi'];
-		$kategori			= $_POST['kategori'];
+		$judul 				= addslashes($_POST['judul']);
+		$pembicara		= addslashes($_POST['pembicara']);
+		$deskripsi			= addslashes($_POST['deskripsi']);
+		$kategori			= addslashes($_POST['kategori']);
 
 		$query 		= "INSERT INTO artikel_kajian VALUES('', '$judul', '$pembicara','$deskripsi','$kategori',now(),now())";
 
@@ -25,14 +25,20 @@
 		}
 	} elseif (isset($_GET['hapus'])) {
 		$query = "DELETE FROM artikel_kajian WHERE id='".$_GET['hapus']."'";
+		$set0		= "SET FOREIGN_KEY_CHECKS=0";
+		$set1		= "SET FOREIGN_KEY_CHECKS=1";
+
+		$conn->query($set0);
 		$result 	= $conn->query($query);
 		if ($result) {
 			echo "<script>
 						alert('Berhasil dihapus');
-						window.location='".$link."/artikelkajian.php'.;
+						window.location='".$link."/artikelkajian.php';
 						</script>";
+						$conn->query($set1);
 		}else{
 			echo $conn->error;
+			$conn->query($set1);
 			echo "error";
 		}
 	} elseif (isset($_GET['hapuskomen'])) {
@@ -49,10 +55,10 @@
 		}
 	} elseif (isset($_POST['update'])) {
 		$id 	= $_POST['id'];
-		$judul 				= $_POST['judul'];
-		$pembicara		= $_POST['pembicara'];
-		$deskripsi			= $_POST['deskripsi'];
-		$kategori			= $_POST['kategori'];
+		$judul 				= addslashes($_POST['judul']);
+		$pembicara		= addslashes($_POST['pembicara']);
+		$deskripsi			= addslashes($_POST['deskripsi']);
+		$kategori			= addslashes($_POST['kategori']);
 
 		$query 		= "UPDATE artikel_kajian SET judul='$judul',pembicara='$pembicara',deskripsi='$deskripsi',kategori='$kategori' WHERE id='$id' ";
 

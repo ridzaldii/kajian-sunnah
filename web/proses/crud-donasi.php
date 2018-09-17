@@ -31,14 +31,20 @@
 		}
 	} elseif (isset($_GET['hapus'])) {
 		$query = "DELETE FROM donasi WHERE id='".$_GET['hapus']."'";
+		$set0		= "SET FOREIGN_KEY_CHECKS=0";
+		$set1		= "SET FOREIGN_KEY_CHECKS=1";
+
+		$conn->query($set0);
 		$result 	= $conn->query($query);
 		if ($result) {
 			echo "<script>
 						alert('Berhasil dihapus');
 						window.location='".$link."/infodonasi.php';
 						</script>";
+						$conn->query($set1);
 		}else{
 			echo $conn->error;
+			$conn->query($set1);
 			echo "error";
 		}
 	} elseif (isset($_POST['update'])) {
