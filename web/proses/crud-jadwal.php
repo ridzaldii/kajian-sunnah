@@ -54,13 +54,13 @@
 		$judul 				= addslashes($_POST['judul']);
 		$ustadz				= addslashes($_POST['ustadz']);
 		$deskripsi			= addslashes($_POST['deskripsi']);
-		$hari				= $_POST['hari'];
+		$hari				= $_POST['shari'];
 		$jam				= $_POST['waktu'].":00";
 		$tempat 			= addslashes($_POST['tempat']);
 		$rutin 				= $_POST['rutin'];
 		$panitia			= addslashes($_POST['panitia']);
 		$kontak				= $_POST['kontak'];
-		
+
 		$file		= time()."-".$_FILES['gambar']['name'];
 		$filetmp 		= $_FILES['gambar']['tmp_name'];
 

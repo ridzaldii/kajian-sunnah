@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 10, 2018 at 07:06 PM
+-- Generation Time: Sep 18, 2018 at 05:28 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -65,7 +65,7 @@ CREATE TABLE `artikel_kajian` (
 --
 
 INSERT INTO `artikel_kajian` (`id`, `judul`, `pembicara`, `deskripsi`, `kategori`, `tanggal`, `jam`) VALUES
-(1, 'Syarat sah salat', 'Ustads inia', '\"(Syarat dalam bab shalat ialah) hal-hal yang menjadi penentu keabsahan shalat, namun bukan bagian dari shalat. Berbeda dengan rukun yang merupakan bagian shalat.\"', 'fikih', '2018-07-01', '12:00:00'),
+(1, 'Syarat sah salat', 'Ustads inia', '\'(Syarat dalam bab shalat ialah) hal-hal yang menjadi penentu keabsahan shalat, namun bukan bagian dari shalat. Berbeda dengan rukun yang merupakan bagian shalat.\'', 'fikih', '2018-07-01', '12:00:00'),
 (2, 'Makhrijal Huruf', 'Yusu Mansyur', 'Pengucapan huruf hijaiyah', 'tauhid', '2018-07-01', '16:00:00');
 
 -- --------------------------------------------------------
@@ -108,15 +108,6 @@ CREATE TABLE `hari` (
   `Minggu` enum('Ya','Tidak') NOT NULL DEFAULT 'Tidak'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `hari`
---
-
-INSERT INTO `hari` (`id`, `id_jadwal`, `Senin`, `Selasa`, `Rabu`, `Kamis`, `Jumat`, `Sabtu`, `Minggu`) VALUES
-(1, 1, 'Ya', 'Ya', 'Tidak', 'Tidak', 'Ya', 'Tidak', 'Tidak'),
-(2, 2, 'Tidak', 'Tidak', 'Tidak', 'Ya', 'Tidak', 'Tidak', 'Tidak'),
-(3, 3, 'Tidak', 'Tidak', 'Tidak', 'Tidak', 'Ya', 'Tidak', 'Tidak');
-
 -- --------------------------------------------------------
 
 --
@@ -138,13 +129,12 @@ CREATE TABLE `jadwal_kajian` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `jadwal_kajian`
+-- Triggers `jadwal_kajian`
 --
-
-INSERT INTO `jadwal_kajian` (`id`, `judul`, `ustadz`, `deskripsi`, `tanggal`, `waktu`, `tempat`, `rutin`, `gambar`, `panitia`, `kontak`) VALUES
-(1, 'Syarat sah salat', 'Yusuf Mansyur', '\"(Syarat dalam bab shalat ialah) hal-hal yang menjadi penentu keabsahan shalat, namun bukan bagian dari shalat. Berbeda dengan rukun yang merupakan bagian shalat.\"', '2018-07-31', '15:00:00', 'Masjid baiturahman', 'Ya', NULL, 'AAA', '82291760763'),
-(2, 'Ceramah ramadhan 2', 'yusuf', 'ceramah ramadhan 2', '2018-06-28', '13:00:00', 'Masjid nurul hijrah', 'Tidak', NULL, '', ''),
-(3, 'Bersatu diatas Jalannya Rasul dan Para Sahabat', 'Abdurrahman Thoyyib, Lc', 'Tabligh Akbar Terbuka untuk umum', '2018-07-27', '07:25:00', 'Masjid Al-Firdaus', 'Tidak', '1530881237-TABLIGH-AKBAR-730x1024.jpg', '', '');
+DELIMITER $$
+CREATE TRIGGER `deleteHari` BEFORE DELETE ON `jadwal_kajian` FOR EACH ROW DELETE FROM `hari` WHERE `hari`.`id_jadwal` = OLD.id
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -270,13 +260,13 @@ ALTER TABLE `donasi`
 -- AUTO_INCREMENT for table `hari`
 --
 ALTER TABLE `hari`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `jadwal_kajian`
 --
 ALTER TABLE `jadwal_kajian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `komentar`
@@ -288,7 +278,7 @@ ALTER TABLE `komentar`
 -- AUTO_INCREMENT for table `rekaman_kajian`
 --
 ALTER TABLE `rekaman_kajian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
@@ -310,7 +300,7 @@ DELIMITER $$
 --
 -- Events
 --
-CREATE DEFINER=`root`@`localhost` EVENT `deleteRecord` ON SCHEDULE EVERY 1 MINUTE STARTS '2018-06-24 00:00:00' ENDS '2018-09-28 00:00:00' ON COMPLETION NOT PRESERVE DISABLE COMMENT 'Delete records' DO DELETE FROM `kajian_sunnah`.`jadwal_kajian` WHERE `tanggal` < NOW() AND `waktu` < NOW()$$
+CREATE DEFINER=`root`@`localhost` EVENT `deleteRecord` ON SCHEDULE EVERY 1 MINUTE STARTS '2018-09-18 00:00:00' ENDS '2018-12-31 00:00:00' ON COMPLETION NOT PRESERVE ENABLE COMMENT 'Delete records' DO DELETE FROM `kajian_sunnah`.`jadwal_kajian` WHERE `tanggal` <= NOW() AND waktu < NOW() AND `rutin` = 'Tidak'$$
 
 DELIMITER ;
 COMMIT;

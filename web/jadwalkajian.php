@@ -201,7 +201,13 @@ if (!isset($_SESSION['nama_user'])) {
                       <td>
                         <div class="table-cell-inner"><?php echo $row['deskripsi']; ?></div>
                       </td>
-                      <td><?php echo $row['tanggal']; ?></td>
+                      <td><?php
+                          if ($row['tanggal'] == '0000-00-00') {
+                            echo "-";
+                          } else{
+                            echo $row['tanggal']; 
+                          }
+                      ?></td>
                       <td><?php
                             $query1 = "SELECT * FROM hari WHERE id_jadwal = ".$row['id'];
                             $result1 = $conn->query($query1);
